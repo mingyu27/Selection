@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Selection</string>
+    <string name="title_activity_join">Join</string>
 </resources>
