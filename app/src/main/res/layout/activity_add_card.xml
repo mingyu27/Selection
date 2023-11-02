@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카드추가"
+            android:layout_marginStart="10dp"
+            android:textSize="30dp"
+            android:layout_gravity="bottom">
+        </TextView>
+
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="보유 중인 카드사 중복 선택해주세요."
+            android:textSize="17dp"
+            android:textColor="#7E7E7E"
+            android:layout_marginTop="30dp" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <Button
+                android:id="@+id/shinhan_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:drawableTop="@drawable/shinhan"
+                android:text="신한카드" />
+
+        </GridLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/next1_join"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="다음"
+            android:textColor="#000000"
+            android:background="#fffff"
+            android:layout_marginEnd="30dp"
+            android:textSize="15dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

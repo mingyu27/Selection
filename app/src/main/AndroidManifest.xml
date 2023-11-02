@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Selection"
         tools:targetApi="31">
         <activity
+            android:name=".add_card"
+            android:exported="false" />
+        <activity
             android:name=".join"
             android:exported="false" />
         <activity
