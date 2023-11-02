@@ -30,11 +30,11 @@
         android:visibility="gone"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
         android:id="@+id/logout"
-        android:visibility="gone"/>
+        android:layout_width="284dp"
+        android:layout_height="340dp"
+        android:text="Logout"
+        android:visibility="gone" />
 
 
 </LinearLayout>

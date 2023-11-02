@@ -105,5 +105,3 @@ public class Login extends AppCompatActivity {
 }
 
 //smg
-//sng22
-///smg33
