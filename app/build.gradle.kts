@@ -82,4 +82,6 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest") //GLIDE
+    implementation ("androidx.core:core-splashscreen:1.0.0-alpha01") //splash
+
 }

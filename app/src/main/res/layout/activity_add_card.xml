@@ -39,7 +39,6 @@
                 android:id="@+id/shinhan_button"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:drawableTop="@drawable/shinhan"
                 android:text="신한카드" />
 
         </GridLayout>
@@ -56,7 +55,7 @@
             android:layout_alignParentRight="true"
             android:text="다음"
             android:textColor="#000000"
-            android:background="#fffff"
+            android:background="#00ffffff"
             android:layout_marginEnd="30dp"
             android:textSize="15dp"/>
     </RelativeLayout>

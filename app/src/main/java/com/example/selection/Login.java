@@ -1,6 +1,7 @@
 package com.example.selection;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.splashscreen.SplashScreen;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         setContentView(binding.getRoot());
         loginButton = binding.kakaoLogin;
         logoutButton = binding.logout;
