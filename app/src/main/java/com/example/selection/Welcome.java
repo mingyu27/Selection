@@ -3,6 +3,7 @@ package com.example.selection;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.selection.databinding.ActivityLoginBinding;
+import com.example.selection.databinding.ActivityWelcomeBinding;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
@@ -19,23 +21,21 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-public class Login extends AppCompatActivity {
+public class Welcome extends AppCompatActivity {
     private static final String TAG = "Login";
-    private ActivityLoginBinding binding;
-    private View loginButton, logoutButton;
-    private TextView nickname;
-    private ImageView profileImage;
+    private ActivityWelcomeBinding binding;
+    private View loginWithKakaoButton;
+    private View logoutButton;
+    private String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
         setContentView(binding.getRoot());
-        loginButton = binding.kakaoLogin;
+        loginWithKakaoButton = binding.loginWithKakaoButton;
         logoutButton = binding.logout;
-        nickname = binding.nickname;
-        profileImage = binding.profile;
 
 
 
@@ -49,18 +49,22 @@ public class Login extends AppCompatActivity {
                     // TBD
                     Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());
                 }
-                Login.this.updateKakaoLoginUi();
+                Welcome.this.updateKakaoLoginUi();
                 return null;
             }
         };
 
-        loginButton.setOnClickListener(view -> {
-            if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login.this)) {
-                UserApiClient.getInstance().loginWithKakaoTalk(Login.this, callback);
+        loginWithKakaoButton.setOnClickListener(view -> {
+            if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(Welcome.this)) {
+                UserApiClient.getInstance().loginWithKakaoTalk(Welcome.this, callback);
             } else {
-                UserApiClient.getInstance().loginWithKakaoAccount(Login.this, callback);
+                UserApiClient.getInstance().loginWithKakaoAccount(Welcome.this, callback);
+                //
             }
+
         });
+
+
 
 
         logoutButton.setOnClickListener(view -> UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
@@ -72,6 +76,7 @@ public class Login extends AppCompatActivity {
         }));
 
         updateKakaoLoginUi();
+        //startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("userName", userName));
     }
 
 
@@ -87,15 +92,19 @@ public class Login extends AppCompatActivity {
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-                    nickname.setText(user.getKakaoAccount().getProfile().getNickname());
-                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(binding.profile);
-                    loginButton.setVisibility(View.GONE);
-                    logoutButton.setVisibility(View.VISIBLE);
+                    userName = user.getKakaoAccount().getProfile().getNickname();
+                    binding.welcomeText.setText(userName +" 로그인됨");
+//                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(binding.profile);
+                    binding.loginWithKakaoButton.setVisibility(View.GONE);
+                    binding.loginWithLocal.setVisibility(View.GONE);
+                    binding.joinWithLocal.setVisibility(View.GONE);
+                    binding.logout.setVisibility(View.VISIBLE);
                 } else {
-                    nickname.setText(null);
-                    profileImage.setImageBitmap(null);
-                    loginButton.setVisibility(View.VISIBLE);
-                    logoutButton.setVisibility(View.GONE);
+                    binding.welcomeText.setText("안녕하세용?");
+                    binding.loginWithKakaoButton.setVisibility(View.VISIBLE);
+                    binding.loginWithLocal.setVisibility(View.VISIBLE);
+                    binding.joinWithLocal.setVisibility(View.VISIBLE);
+                    binding.logout.setVisibility(View.GONE);
                 }
                 if (throwable != null) {
                     Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());

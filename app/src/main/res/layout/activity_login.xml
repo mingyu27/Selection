@@ -29,12 +29,13 @@
         android:src="@drawable/kakao_login_large_wide"
         android:visibility="gone"/>
 
-    <Button
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/logout"
-        android:layout_width="284dp"
-        android:layout_height="340dp"
-        android:text="Logout"
-        android:visibility="gone" />
+        android:src="@drawable/logout"
+        android:visibility="gone"/>
+
 
 
 </LinearLayout>
