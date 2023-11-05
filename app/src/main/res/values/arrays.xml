@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="comapany">
+        <item>국민</item>
+        <item>신한</item>
+    </string-array>
+
+    <string-array name="kookminCard">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="shinhanCard">
+        <item>11번가 신한카드 체크</item>
+        <item>개인택시운송사업자 신한카드 체크</item>
+        <item>공무원연금복지 신한카드 S-Choice (선택형) 체크</item>
+        <item>나주사랑 신한카드 S-Choice(선택형) 체크</item>
+        <item>네이버페이 신한카드 체크</item>
+        <item>다이소 신한카드 체크</item>
+        <item>대덕e로움 신한카드 S-Choice 체크</item>
+        <item>더본 신한카드 체크</item>
+        <item>땡겨요 신한카드 체크</item>
+        <item>땡겨요 신한카드 체크(라이더형)</item>
+        <item>리디 신한카드 체크</item>
+        <item>마이 홈플러스 신한카드 체크</item>
+        <item>메가쇼핑 신한카드 체크</item>
+        <item>몰테일 신한카드 체크</item>
+        <item>부산가족사랑 신한카드 S-Choice 체크</item>
+        <item>삼성증권 CMA 신한카드 Big Plus 체크</item>
+        <item>성남사랑 신한카드 Deep Dream 체크</item>
+        <item>성남사랑 신한카드 Deep Dream 체크(chak)</item>
+        <item>성남시 아동수당 신한카드 Deep Dream 체크</item>
+        <item>스포츠바우처 카카오페이 신한 체크카드(무지)</item>
+        <item></item>
+        <item></item>
+    </string-array>
+
+
+</resources>
