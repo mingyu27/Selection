@@ -50,6 +50,7 @@ public class Welcome extends AppCompatActivity {
                     Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());
                 }
                 Welcome.this.updateKakaoLoginUi();
+
                 return null;
             }
         };
@@ -61,6 +62,7 @@ public class Welcome extends AppCompatActivity {
                 UserApiClient.getInstance().loginWithKakaoAccount(Welcome.this, callback);
                 //
             }
+
 
 
         });
@@ -77,7 +79,7 @@ public class Welcome extends AppCompatActivity {
         }));
 
         updateKakaoLoginUi();
-        //startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("userName", userName));
+
     }
 
 
@@ -88,12 +90,13 @@ public class Welcome extends AppCompatActivity {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if (user != null) {
+                    userName = user.getKakaoAccount().getProfile().getNickname();
+                    startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("userName", userName));
                     Log.i(TAG, "invoke: id=" + user.getId());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-                    userName = user.getKakaoAccount().getProfile().getNickname();
                     binding.welcomeText.setText(userName +" 로그인됨");
 //                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(binding.profile);
                     binding.loginWithKakaoButton.setVisibility(View.GONE);

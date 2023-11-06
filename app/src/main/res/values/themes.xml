@@ -30,5 +30,11 @@
         <item name="colorControlNormal">#00000000</item>
     </style>
 
+    <style name="NewDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main_color</item>
+        <item name="android:windowMinWidthMajor">95%</item>
+        <item name="android:windowMinWidthMinor">95%</item>
+    </style>
+
 
 </resources>
