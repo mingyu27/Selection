@@ -25,6 +25,10 @@
         <item name="postSplashScreenTheme">@style/Theme.Selection</item>  # Required.
     </style>
 
+    <style name="NumberPickerTheme" parent="Theme.Selection">
+        <!-- NumberPicker divider color -->
+        <item name="colorControlNormal">#00000000</item>
+    </style>
 
 
 </resources>
