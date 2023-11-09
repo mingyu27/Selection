@@ -26,6 +26,7 @@ public class Welcome extends AppCompatActivity {
     private ActivityWelcomeBinding binding;
     private View loginWithKakaoButton;
     private View logoutButton;
+    private View loginButton, joinButton;
     private String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,21 @@ public class Welcome extends AppCompatActivity {
         setContentView(binding.getRoot());
         loginWithKakaoButton = binding.loginWithKakaoButton;
         logoutButton = binding.logout;
+        loginButton = binding.loginWithLocal;
+        joinButton = binding.joinWithLocal;
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Welcome.this, LoginPage.class));
+            }
+        });
 
-
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Welcome.this, Join.class));
+            }
+        });
 
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override

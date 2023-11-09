@@ -16,6 +16,15 @@
         android:theme="@style/Theme.Selection"
         tools:targetApi="31">
         <activity
+            android:name=".Information"
+            android:exported="false" />
+        <activity
+            android:name=".Menu"
+            android:exported="false" />
+        <activity
+            android:name=".LoginPage"
+            android:exported="false" />
+        <activity
             android:name=".AddCardByCompany"
             android:exported="true">
             <intent-filter>
