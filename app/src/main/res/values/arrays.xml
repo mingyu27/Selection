@@ -5,31 +5,7 @@
         <item>신한</item>
     </string-array>
 
-    <string-array name="kookminCard">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-    </string-array>
-
-    <string-array name="shinhanCard">
+    <string-array name="shinHanCardNameList">
         <item>11번가 신한카드 체크</item>
         <item>개인택시운송사업자 신한카드 체크</item>
         <item>공무원연금복지 신한카드 S-Choice (선택형) 체크</item>
@@ -50,9 +26,18 @@
         <item>성남사랑 신한카드 Deep Dream 체크(chak)</item>
         <item>성남시 아동수당 신한카드 Deep Dream 체크</item>
         <item>스포츠바우처 카카오페이 신한 체크카드(무지)</item>
-        <item></item>
-        <item></item>
+
     </string-array>
+
+    <array name="shinHanCardImageList">
+        <item>@drawable/sh1image</item>
+        <item>@drawable/selection_logo</item>
+        <item>@drawable/shinhan_logo</item>
+
+
+    </array>
+
+
 
 
 </resources>
