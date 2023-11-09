@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "207755167571",
+    "project_id": "selection-7cede",
+    "storage_bucket": "selection-7cede.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207755167571:android:262a4c9e61cfee73aa03a6",
+        "android_client_info": {
+          "package_name": "com.example.selection"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb0Ra_oEeYGMNkw4kx_LR_0Ssn3l1MhW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
