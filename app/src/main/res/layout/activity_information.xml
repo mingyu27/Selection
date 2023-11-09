@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/teal_200"
     tools:context=".Information">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#ff2">
+        >
 
-        <Button
+        <ImageView
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content"
-            android:text="Button"/>
+            android:layout_height="40dp"
+            android:text="Button"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,6 +45,7 @@
             android:textSize="50sp"
             android:layout_centerHorizontal="true"/>
         <RelativeLayout
+            android:background="@drawable/round"
             android:layout_centerHorizontal="true"
             android:layout_width="380dp"
             android:layout_height="80dp"
@@ -74,7 +76,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="380dp"
             android:layout_height="80dp"
-            android:background="#FF2"
+            android:background="@drawable/round"
             android:layout_marginTop="210dp"
             >
             <TextView
@@ -100,7 +102,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="380dp"
             android:layout_height="80dp"
-            android:background="#FF2"
+            android:background="@drawable/round"
             android:layout_marginTop="300dp"
             >
             <TextView
@@ -111,20 +113,21 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="40dp"
                 />
-            <Button
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25sp"
+                android:textSize="30dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
+                android:src="@drawable/baseline_arrow_forward_ios_24"
                 />
         </RelativeLayout>
         <RelativeLayout
             android:layout_centerHorizontal="true"
             android:layout_width="380dp"
             android:layout_height="80dp"
-            android:background="#FF2"
+            android:background="@drawable/round"
             android:layout_marginTop="390dp"
             >
             <TextView
