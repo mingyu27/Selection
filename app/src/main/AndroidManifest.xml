@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Selection"
         tools:targetApi="31">
         <activity
+            android:name=".PwChange"
+            android:exported="false" />
+        <activity
             android:name=".Information"
             android:exported="false" />
         <activity
