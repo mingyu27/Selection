@@ -26,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.userNameText.setText(getIntent().getStringExtra("userName"));
-        startActivity(new Intent(MainActivity.this, LocationChooseDialog.class));
+        //if userName is enrolled
+        //startActivity(new Intent(MainActivity.this, LocationChooseDialog.class));
+
+        startActivity(new Intent(MainActivity.this, AddCardByCompany.class));
 
 
 

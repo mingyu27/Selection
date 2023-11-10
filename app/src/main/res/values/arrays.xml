@@ -5,6 +5,9 @@
         <item>신한</item>
     </string-array>
 
+
+
+<!--    신한카드목록-->
     <string-array name="shinHanCardNameList">
         <item>11번가 신한카드 체크</item>
         <item>개인택시운송사업자 신한카드 체크</item>
@@ -36,6 +39,23 @@
 
 
     </array>
+
+
+
+
+
+
+<!--    국민카드목록-->
+    <string-array name="kookMinCardNameList">
+
+    </string-array>
+
+    <array name="kookMinCardImageList">
+
+    </array>
+
+
+
 
 
 

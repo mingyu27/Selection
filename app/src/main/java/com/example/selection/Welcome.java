@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.selection.databinding.ActivityLoginBinding;
 import com.example.selection.databinding.ActivityWelcomeBinding;
 import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
@@ -34,6 +35,8 @@ public class Welcome extends AppCompatActivity {
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
+        String kakaoHashKey = KakaoSdk.INSTANCE.getKeyHash();
+        Log.d("kakaoHashKey", kakaoHashKey);
         setContentView(binding.getRoot());
         loginWithKakaoButton = binding.loginWithKakaoButton;
         logoutButton = binding.logout;
