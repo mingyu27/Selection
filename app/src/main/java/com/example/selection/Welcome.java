@@ -37,6 +37,8 @@ public class Welcome extends AppCompatActivity {
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
+        String kakaoHashKey = KakaoSdk.INSTANCE.getKeyHash();
+        Log.d("kakaoHashKey", kakaoHashKey);
         setContentView(binding.getRoot());
         loginWithKakaoButton = binding.loginWithKakaoButton;
         logoutButton = binding.logout;
