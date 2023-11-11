@@ -36,8 +36,124 @@
 
 
     </array>
-
-
+    <string-array name = "kookMinCardNameList">
+        <item>AK KB국민 체크카드</item>
+        <item>H.Point 체크카드</item>
+        <item>kb pay 머니백카드</item>
+        <item>kb국민 국민행복체크</item>
+        <item>kb국민 우리동네 체크카드</item>
+        <item>kb국민 티머니노리 학생증 체크카드 (블루-세로형)</item>
+        <item>kb국민 티머니노리 학생증체크카드(그린)</item>
+        <item>kb국민 티머니노리 학생증체크카드(블루)</item>
+        <item>kb국민 티머니노리 학생증체크카드(세로형_그린)</item>
+        <item>kb국민 티머니노리 학생증체크카드(세로형_퍼플)</item>
+        <item>kb국민 티머니노리 학생증체크카드(퍼플)</item>
+        <item>lg u+체크카드</item>
+        <item>liiv M 체크카드</item>
+        <item>ONE 체크카드</item>
+        <item>TMAP LOGI행복체크카드</item>
+        <item>Young Youth 체크카드</item>
+        <item>가온 올포인트 체크카드</item>
+        <item>가온체크카드</item>
+        <item>그린재킷 체크카드</item>
+        <item>나라사랑체크카드</item>
+        <item>노리2 체크카드(Global)</item>
+        <item>노리2 체크카드(KB pay)</item>
+        <item>노리2 체크카드(Play)</item>
+        <item>노리체크카드</item>
+        <item>누리체크카드</item>
+        <item>락스타 체크카드</item>
+        <item>레고랜드 체크카드</item>
+        <item>리브 NEXT카드</item>
+        <item>민 체크카드</item>
+        <item>비트윈 체크카드</item>
+        <item>새로이 체크카드</item>
+        <item>샘쏘영 체크카드</item>
+        <item>스타체크카드</item>
+        <item>스타플러스 체크카드</item>
+        <item>쏘영 체크카드</item>
+        <item>아모레퍼시픽 체크카드</item>
+        <item>아시아나 체크카드</item>
+        <item>알뜰교통플러스 체크카드</item>
+        <item>위글위글 첵첵 체크카드</item>
+        <item>위메프페이 체크카드</item>
+        <item>음 체크카드</item>
+        <item>정 체크카드</item>
+        <item>직장인 보너스체크카드</item>
+        <item>청춘대로 싱글 체크카드</item>
+        <item>총무 체크카드</item>
+        <item>카카오페이kb국민체크카드</item>
+        <item>탐나는전 체크카드</item>
+        <item>토심이 첵첵 체크카드</item>
+        <item>티머니체크카드</item>
+        <item>펭수노리 체크카드</item>
+        <item>포인트리체크카드</item>
+        <item>해외에선 체크카드</item>
+        <item>해피cu포인트 체크카드</item>
+        <item>해피노리체크카드</item>
+        <item>해피락스타 체크카드</item>
+        <item>해피리워드 체크카드</item>
+        <item>훈 체크카드</item>
+    </string-array>
+    <array name = "kookMinCardImageList">
+        <item>@drawable/kookmin0</item>
+        <item>@drawable/kookmin1</item>
+        <item>@drawable/kookmin2</item>
+        <item>@drawable/kookmin3</item>
+        <item>@drawable/kookmin4</item>
+        <item>@drawable/kookmin5</item>
+        <item>@drawable/kookmin6</item>
+        <item>@drawable/kookmin7</item>
+        <item>@drawable/kookmin8</item>
+        <item>@drawable/kookmin9</item>
+        <item>@drawable/kookmin10</item>
+        <item>@drawable/kookmin11</item>
+        <item>@drawable/kookmin12</item>
+        <item>@drawable/kookmin13</item>
+        <item>@drawable/kookmin14</item>
+        <item>@drawable/kookmin15</item>
+        <item>@drawable/kookmin16</item>
+        <item>@drawable/kookmin17</item>
+        <item>@drawable/kookmin18</item>
+        <item>@drawable/kookmin19</item>
+        <item>@drawable/kookmin20</item>
+        <item>@drawable/kookmin21</item>
+        <item>@drawable/kookmin22</item>
+        <item>@drawable/kookmin23</item>
+        <item>@drawable/kookmin24</item>
+        <item>@drawable/kookmin25</item>
+        <item>@drawable/kookmin26</item>
+        <item>@drawable/kookmin27</item>
+        <item>@drawable/kookmin28</item>
+        <item>@drawable/kookmin29</item>
+        <item>@drawable/kookmin30</item>
+        <item>@drawable/kookmin31</item>
+        <item>@drawable/kookmin32</item>
+        <item>@drawable/kookmin33</item>
+        <item>@drawable/kookmin34</item>
+        <item>@drawable/kookmin35</item>
+        <item>@drawable/kookmin36</item>
+        <item>@drawable/kookmin37</item>
+        <item>@drawable/kookmin38</item>
+        <item>@drawable/kookmin39</item>
+        <item>@drawable/kookmin40</item>
+        <item>@drawable/kookmin41</item>
+        <item>@drawable/kookmin42</item>
+        <item>@drawable/kookmin43</item>
+        <item>@drawable/kookmin44</item>
+        <item>@drawable/kookmin45</item>
+        <item>@drawable/kookmin46</item>
+        <item>@drawable/kookmin47</item>
+        <item>@drawable/kookmin48</item>
+        <item>@drawable/kookmin49</item>
+        <item>@drawable/kookmin50</item>
+        <item>@drawable/kookmin51</item>
+        <item>@drawable/kookmin52</item>
+        <item>@drawable/kookmin53</item>
+        <item>@drawable/kookmin54</item>
+        <item>@drawable/kookmin55</item>
+        <item>@drawable/kookmin56</item>
+    </array>
 
 
 </resources>
