@@ -5,13 +5,22 @@
         <item>신한</item>
     </string-array>
 
-
-
 <!--    신한카드목록-->
     <string-array name="shinHanCardNameList">
         <item>11번가 신한카드 체크</item>
+        <item>CJ ONE 신한카드 체크</item>
+        <item>GS Prime 신한카드 체크</item>
+        <item>GS칼텍스 신한카드 경차사랑 체크</item>
+        <item>KBO 제휴 신한카드 MY KBO 체크</item>
+        <item>KT 신한카드 체크</item>
+        <item>L.PAY 신한카드 체크</item>
+        <item>LG트위스 신한카드 체크</item>
+        <item>S.Sing 씽화물복지 신한카드 체크</item>
+        <item>SOCAR 제휴 SOCAR 신한카드 체크</item>
+        <item>SOL Deep Dream 신한카드 체크</item>
         <item>개인택시운송사업자 신한카드 체크</item>
         <item>공무원연금복지 신한카드 S-Choice (선택형) 체크</item>
+        <item>국민내일배움 FANtastic S 신한카드 체크</item>
         <item>나주사랑 신한카드 S-Choice(선택형) 체크</item>
         <item>네이버페이 신한카드 체크</item>
         <item>다이소 신한카드 체크</item>
@@ -29,14 +38,172 @@
         <item>성남사랑 신한카드 Deep Dream 체크(chak)</item>
         <item>성남시 아동수당 신한카드 Deep Dream 체크</item>
         <item>스포츠바우처 카카오페이 신한 체크카드(무지)</item>
-
+        <item>신세계 신한카드 체크</item>
+        <item>신한카드 4Tune 체크</item>
+        <item>신한카드 Deep Dream 체크</item>
+        <item>신한카드 Deep Dream 체크(미니언즈)</item>
+        <item>신한카드 EV 체크</item>
+        <item>신한카드 FANtastic S 체크</item>
+        <item>신한카드 FANtastic S 체크(DRX)</item>
+        <item>신한카드 FANtastic S 체크(LOL)</item>
+        <item>신한카드 Finnq 체크</item>
+        <item>신한카드 Global Air 스카이패스 체크</item>
+        <item>신한카드 Global Air 아시아나 체크</item>
+        <item>신한카드 Global+체크</item>
+        <item>신한카드 Global+체크(윌리를 찾아라)</item>
+        <item>신한카드 Hey Young 체크</item>
+        <item>신한카드 JYP Fans EDM 체크</item>
+        <item>신한카드 On 체크</item>
+        <item>신한카드 On 체크(잔망루피)</item>
+        <item>신한카드 On 체크(쥬라기)</item>
+        <item>신한카드 On 체크(한국유치원총연합회 교원증)</item>
+        <item>신한카드 Pick E 체크</item>
+        <item>신한카드 Pick E 체크 캐릭터형(오수)</item>
+        <item>신한카드 Pick E 체크(깨댕이)</item>
+        <item>신한카드 Pick E 체크(포켓몬스터)</item>
+        <item>신한카드 Pick I 체크</item>
+        <item>신한카드 Pick I 체크 캐릭터형(맹구)</item>
+        <item>신한카드 Pick I 체크(눙눙이)</item>
+        <item>신한카드 Pick I 체크(포켓몬스터)</item>
+        <item>신한카드 S-Choice(선택형) 체크</item>
+        <item>신한카드 S-Line 체크</item>
+        <item>신한카드 S-Line 체크(마이펫)</item>
+        <item>신한카드 S-Line 체크(미니언즈)</item>
+        <item>신한카드 S-Line 체크(배민커넥트)</item>
+        <item>신한카드 TEENS(틴즈)PLUS PONEY 체크</item>
+        <item>신한카드 TEENS(틴즈)PLUS PONEY 체크 후불교통</item>
+        <item>신한카드 Way 체크</item>
+        <item>신한카드 Way 체크(쥬라기)</item>
+        <item>신한카드 Way 체크(최고심)</item>
+        <item>신한카드 Way체크(미니언즈 여름)</item>
+        <item>신한카드 국민행복 체크</item>
+        <item>신한카드 봄 체크(도구리)</item>
+        <item>신한카드 봄(체크)</item>
+        <item>신한카드 아이행복 체크</item>
+        <item>신한카드 주거래 체크</item>
+        <item>신한카드 플리 체크(산리오캐릭터즈)</item>
+        <item>신한카드 플리(체크)</item>
+        <item>신한카드 하이패스(전용) 체크</item>
+        <item>신한카드 하이패스(전용) 체크(SIM형)</item>
+        <item>신한투자증권 CMA R+ 신한카드 Love 체크</item>
+        <item>신한플러스 멤버십 체크</item>
+        <item>아모레퍼시픽 신한카드 체크</item>
+        <item>알뜰교통 신한카드 S20 체크</item>
+        <item>알뜰주유소 화물운전자복지 신한카드 체크</item>
+        <item>요기요 신한카드 체크</item>
+        <item>요기패스 신한카드 체크</item>
+        <item>위메프페이 신한카드 체크</item>
+        <item>장애인 통합복지 신한카드 2030 체크</item>
+        <item>장애인 통합복지 신한카드 Lady 체크</item>
+        <item>청년동행 신한카드 Deep Dream 체크</item>
+        <item>청년취업 FANtastic S 신한카드 체크</item>
+        <item>카카오페이 신한 체크카드</item>
+        <item>카카오페이 신한 콘 체크카드</item>
+        <item>쿠팡 신한카드 체크</item>
+        <item>탑마트 보너스포인트 신한카드 체크</item>
+        <item>투썸플레이스 신한카드 체크</item>
+        <item>한국야쿠르트 팝 신한카드 체크</item>
+        <item>화물운전자복지 신한카드 체크</item>
     </string-array>
 
     <array name="shinHanCardImageList">
-        <item>@drawable/sh1image</item>
-        <item>@drawable/selection_logo</item>
-        <item>@drawable/shinhan_logo</item>
-
+        <item>@drawable/shinhancard0</item>
+        <item>@drawable/shinhancard1</item>
+        <item>@drawable/shinhancard2</item>
+        <item>@drawable/shinhancard3</item>
+        <item>@drawable/shinhancard4</item>
+        <item>@drawable/shinhancard5</item>
+        <item>@drawable/shinhancard6</item>
+        <item>@drawable/shinhancard7</item>
+        <item>@drawable/shinhancard8</item>
+        <item>@drawable/shinhancard9</item>
+        <item>@drawable/shinhancard10</item>
+        <item>@drawable/shinhancard11</item>
+        <item>@drawable/shinhancard12</item>
+        <item>@drawable/shinhancard13</item>
+        <item>@drawable/shinhancard14</item>
+        <item>@drawable/shinhancard15</item>
+        <item>@drawable/shinhancard16</item>
+        <item>@drawable/shinhancard17</item>
+        <item>@drawable/shinhancard18</item>
+        <item>@drawable/shinhancard19</item>
+        <item>@drawable/shinhancard20</item>
+        <item>@drawable/shinhancard21</item>
+        <item>@drawable/shinhancard22</item>
+        <item>@drawable/shinhancard23</item>
+        <item>@drawable/shinhancard24</item>
+        <item>@drawable/shinhancard25</item>
+        <item>@drawable/shinhancard26</item>
+        <item>@drawable/shinhancard27</item>
+        <item>@drawable/shinhancard28</item>
+        <item>@drawable/shinhancard29</item>
+        <item>@drawable/shinhancard30</item>
+        <item>@drawable/shinhancard31</item>
+        <item>@drawable/shinhancard32</item>
+        <item>@drawable/shinhancard33</item>
+        <item>@drawable/shinhancard34</item>
+        <item>@drawable/shinhancard35</item>
+        <item>@drawable/shinhancard36</item>
+        <item>@drawable/shinhancard37</item>
+        <item>@drawable/shinhancard38</item>
+        <item>@drawable/shinhancard39</item>
+        <item>@drawable/shinhancard40</item>
+        <item>@drawable/shinhancard41</item>
+        <item>@drawable/shinhancard42</item>
+        <item>@drawable/shinhancard43</item>
+        <item>@drawable/shinhancard44</item>
+        <item>@drawable/shinhancard45</item>
+        <item>@drawable/shinhancard46</item>
+        <item>@drawable/shinhancard47</item>
+        <item>@drawable/shinhancard48</item>
+        <item>@drawable/shinhancard49</item>
+        <item>@drawable/shinhancard50</item>
+        <item>@drawable/shinhancard51</item>
+        <item>@drawable/shinhancard52</item>
+        <item>@drawable/shinhancard53</item>
+        <item>@drawable/shinhancard54</item>
+        <item>@drawable/shinhancard55</item>
+        <item>@drawable/shinhancard56</item>
+        <item>@drawable/shinhancard57</item>
+        <item>@drawable/shinhancard58</item>
+        <item>@drawable/shinhancard59</item>
+        <item>@drawable/shinhancard60</item>
+        <item>@drawable/shinhancard61</item>
+        <item>@drawable/shinhancard62</item>
+        <item>@drawable/shinhancard63</item>
+        <item>@drawable/shinhancard64</item>
+        <item>@drawable/shinhancard65</item>
+        <item>@drawable/shinhancard66</item>
+        <item>@drawable/shinhancard67</item>
+        <item>@drawable/shinhancard68</item>
+        <item>@drawable/shinhancard69</item>
+        <item>@drawable/shinhancard70</item>
+        <item>@drawable/shinhancard71</item>
+        <item>@drawable/shinhancard72</item>
+        <item>@drawable/shinhancard73</item>
+        <item>@drawable/shinhancard74</item>
+        <item>@drawable/shinhancard75</item>
+        <item>@drawable/shinhancard76</item>
+        <item>@drawable/shinhancard77</item>
+        <item>@drawable/shinhancard78</item>
+        <item>@drawable/shinhancard79</item>
+        <item>@drawable/shinhancard80</item>
+        <item>@drawable/shinhancard81</item>
+        <item>@drawable/shinhancard82</item>
+        <item>@drawable/shinhancard83</item>
+        <item>@drawable/shinhancard84</item>
+        <item>@drawable/shinhancard85</item>
+        <item>@drawable/shinhancard86</item>
+        <item>@drawable/shinhancard87</item>
+        <item>@drawable/shinhancard88</item>
+        <item>@drawable/shinhancard89</item>
+        <item>@drawable/shinhancard90</item>
+        <item>@drawable/shinhancard91</item>
+        <item>@drawable/shinhancard92</item>
+        <item>@drawable/shinhancard93</item>
+        <item>@drawable/shinhancard94</item>
+        <item>@drawable/shinhancard95</item>
+        <item>@drawable/shinhancard96</item>
 
     </array>
 
