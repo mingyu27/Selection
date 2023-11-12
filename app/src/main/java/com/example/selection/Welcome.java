@@ -37,8 +37,7 @@ public class Welcome extends AppCompatActivity {
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
-        String kakaoHashKey = KakaoSdk.INSTANCE.getKeyHash();
-        Log.d("kakaoHashKey", kakaoHashKey);
+
         setContentView(binding.getRoot());
         loginWithKakaoButton = binding.loginWithKakaoButton;
         logoutButton = binding.logout;
@@ -110,18 +109,19 @@ public class Welcome extends AppCompatActivity {
             public Unit invoke(User user, Throwable throwable) {
                 if (user != null) {
                     userName = user.getKakaoAccount().getProfile().getNickname();
-                    startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("userName", userName));
+                    startActivity(new Intent(Welcome.this, AddCardAlert.class).putExtra("userName", userName));
                     Log.i(TAG, "invoke: id=" + user.getId());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-                    binding.welcomeText.setText(userName +" 로그인됨");
-//                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(binding.profile);
-                    binding.loginWithKakaoButton.setVisibility(View.GONE);
-                    binding.loginWithLocal.setVisibility(View.GONE);
-                    binding.joinWithLocal.setVisibility(View.GONE);
-                    binding.logout.setVisibility(View.VISIBLE);
+//                    binding.welcomeText.setText(userName +" 로그인됨");
+////                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(binding.profile);
+//                    binding.loginWithKakaoButton.setVisibility(View.GONE);
+//                    binding.loginWithLocal.setVisibility(View.GONE);
+//                    binding.joinWithLocal.setVisibility(View.GONE);
+//                    binding.logout.setVisibility(View.VISIBLE);
+                    finish();
                 } else {
                     binding.welcomeText.setText("안녕하세용?");
                     binding.loginWithKakaoButton.setVisibility(View.VISIBLE);

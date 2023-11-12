@@ -206,6 +206,8 @@
         <item>@drawable/shinhancard96</item>
 
     </array>
+
+<!--    국민카드목록-->
     <string-array name = "kookMinCardNameList">
         <item>AK KB국민 체크카드</item>
         <item>H.Point 체크카드</item>
@@ -326,16 +328,6 @@
     </array>
 
 
-
-
-<!--    국민카드목록-->
-    <string-array name="kookMinCardNameList">
-
-    </string-array>
-
-    <array name="kookMinCardImageList">
-
-    </array>
 
 
 

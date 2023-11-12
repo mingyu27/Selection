@@ -28,6 +28,7 @@
         android:gravity="bottom|right">
 
         <TextView
+            android:id="@+id/company_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="defaultCompany"
@@ -168,23 +169,31 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:gravity="right">
+        android:gravity="right|bottom">
 
-        <Button
-            android:id="@+id/go_next_text"
-            android:layout_gravity="center_horizontal"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="다음"
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:id="@+id/go_next_button">
 
-        <ImageButton
-            android:id="@+id/go_next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/baseline_arrow_forward_ios_24"
-            android:background="@color/transparent"/>
+            <TextView
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다음"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_arrow_forward_ios_24"
+                android:background="@color/transparent"/>
+
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
