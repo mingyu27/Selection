@@ -36,8 +36,8 @@ public class AddCardSelectCompany extends AppCompatActivity implements View.OnCl
         if(v == binding.goNextButton){
             Log.d("SMG", "YES");
             startActivity(new Intent(AddCardSelectCompany.this, AddCardSelectCard.class).putExtra("CompanyToEnrollList", companyToEnrollList));}
-        else if(v == binding.shinhanButton){companyToEnrollList.add("신한");Log.d("SMG", "YES1");}
-        else if(v == binding.kookminButton){companyToEnrollList.add(("KB국민"));Log.d("SMG", "YES2");}
+        else if(v == binding.shinhanButton){companyToEnrollList.add("신한");binding.shinhanButton.setBackgroundColor(R.color.black);}
+        else if(v == binding.kookminButton){companyToEnrollList.add(("KB국민"));binding.kookminButton.setBackgroundColor(R.color.black);}
 
     }
 
