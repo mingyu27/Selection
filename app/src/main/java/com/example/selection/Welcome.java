@@ -1,5 +1,6 @@
 package com.example.selection;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
@@ -9,133 +10,177 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.selection.databinding.ActivityLoginBinding;
 import com.example.selection.databinding.ActivityWelcomeBinding;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.RuntimeExecutionException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.OAuthProvider;
+import com.google.firebase.functions.FirebaseFunctions;
+import com.google.firebase.functions.HttpsCallableResult;
+import com.kakao.sdk.auth.AuthCodeClient;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 public class Welcome extends AppCompatActivity {
-    private static final String TAG = "Login";
     private ActivityWelcomeBinding binding;
-    private View loginWithKakaoButton;
-    private View logoutButton;
-    private View loginButton, joinButton;
+    private View loginWithKakaoButton, loginButton, joinButton;
+    private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+    private static final String TAG = "SMG";
     private String userName;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        currentUser = mAuth.getCurrentUser();
+        if(currentUser != null) {
+            startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("user", currentUser));
+        }
+
+    }
+
+    //getCustomToken() 실행
+    Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+        @Override
+        public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+            if (oAuthToken != null) {
+                Log.d("TOKEN", oAuthToken.getAccessToken());
+                getCustomToken(oAuthToken.getAccessToken());}
+            if (throwable != null) {
+                Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());}
+
+            updateKakaoInfo();
+            return null;
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String kakaoHashKey = KakaoSdk.INSTANCE.getKeyHash();
-        Log.d("kakaoHashKey", kakaoHashKey);
         super.onCreate(savedInstanceState);
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
-
-
         setContentView(binding.getRoot());
+
+        mAuth = FirebaseAuth.getInstance();
         loginWithKakaoButton = binding.loginWithKakaoButton;
-        logoutButton = binding.logout;
         loginButton = binding.loginWithLocal;
         joinButton = binding.joinWithLocal;
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Welcome.this, LoginPage.class));
-            }
-        });
 
-        joinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Welcome.this, Join.class));
-            }
-        });
 
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-            @Override
-            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                if (oAuthToken != null) {
-                    // TBD
-                }
-                if (throwable != null) {
-                    // TBD
-                    Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());
-                }
-                Welcome.this.updateKakaoLoginUi();
+        loginButton.setOnClickListener(v -> {startActivity(new Intent(Welcome.this, LoginPage.class));});
 
-                return null;
-            }
-        };
+        joinButton.setOnClickListener(v -> {startActivity(new Intent(Welcome.this, Join.class));});
 
+        //카카오톡 or 카카오계정으로 로그인
         loginWithKakaoButton.setOnClickListener(view -> {
             if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(Welcome.this)) {
                 UserApiClient.getInstance().loginWithKakaoTalk(Welcome.this, callback);
+            } else {UserApiClient.getInstance().loginWithKakaoAccount(Welcome.this, callback);}
+        });
+
+//        로그아웃버튼
+//        logoutButton.setOnClickListener(view -> UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+//            @Override
+//            public Unit invoke(Throwable throwable) {
+//                updateKakaoLoginUi();
+//                return null;
+//            }
+//        }));
+    }
+
+
+
+
+
+
+    private void getCustomToken(String accessToken) {
+        FirebaseFunctions functions = FirebaseFunctions.getInstance("asia-northeast3");
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("token", accessToken);
+
+        functions
+                .getHttpsCallable("kakaoCustomAuth")
+                .call(data)
+                .addOnCompleteListener(new OnCompleteListener<HttpsCallableResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<HttpsCallableResult> task) {
+                        try {
+                            // 호출 성공
+                            HashMap<String, Object> result = (HashMap<String, Object>) task.getResult().getData();
+                            String mKey = null;
+                            for (String key : result.keySet()) {
+                                mKey = key;
+                            }
+                            String customToken = result.get(mKey).toString();
+                            // 호출 성공해서 반환받은 커스텀 토큰으로 Firebase Authentication 인증받기
+                            firebaseAuthWithKakao(customToken);
+                        } catch (RuntimeExecutionException e) {
+                            // 호출 실패
+                        }
+                    }
+                });
+    }
+
+    private void firebaseAuthWithKakao(String customToken) {
+        mAuth.signInWithCustomToken(customToken).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // Firebase Authentication 인증 성공 후 로직
+                updateUI(currentUser);
             } else {
-                UserApiClient.getInstance().loginWithKakaoAccount(Welcome.this, callback);
-                //
+                // 실패 후 로직
             }
-
-
-
         });
+    }
 
 
+    private void updateUI(FirebaseUser user){
+        startActivity(new Intent(Welcome.this, AddCardAlert.class).putExtra("userName", userName));
+    }
 
 
-        logoutButton.setOnClickListener(view -> UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-            @Override
-            public Unit invoke(Throwable throwable) {
-                updateKakaoLoginUi();
-                return null;
+    //userName 초기화
+    private void updateKakaoInfo() {
+        UserApiClient.getInstance().me((user, throwable) -> {
+            if (user != null) {
+                userName = user.getKakaoAccount().getProfile().getNickname();
+//                    Log.i(TAG, "invoke: id=" + user.getId());
+//                    Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
+//                    Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
+//                    Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
+//                    Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
+
+            } else {
+
             }
-        }));
-
-        updateKakaoLoginUi();
+            if (throwable != null) {
+                Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());
+            }
+            return null;
+        });
 
     }
 
 
-
-
-    private void updateKakaoLoginUi() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                if (user != null) {
-                    userName = user.getKakaoAccount().getProfile().getNickname();
-                    startActivity(new Intent(Welcome.this, AddCardAlert.class).putExtra("userName", userName));
-                    Log.i(TAG, "invoke: id=" + user.getId());
-                    Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
-                    Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
-                    Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
-                    Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-//                    binding.welcomeText.setText(userName +" 로그인됨");
-////                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(binding.profile);
-//                    binding.loginWithKakaoButton.setVisibility(View.GONE);
-//                    binding.loginWithLocal.setVisibility(View.GONE);
-//                    binding.joinWithLocal.setVisibility(View.GONE);
-//                    binding.logout.setVisibility(View.VISIBLE);
-                    finish();
-                } else {
-                    binding.welcomeText.setText("안녕하세용?");
-                    binding.loginWithKakaoButton.setVisibility(View.VISIBLE);
-                    binding.loginWithLocal.setVisibility(View.VISIBLE);
-                    binding.joinWithLocal.setVisibility(View.VISIBLE);
-                    binding.logout.setVisibility(View.GONE);
-                }
-                if (throwable != null) {
-                    Log.d("TAG", "invoke: " + throwable.getLocalizedMessage());
-                }
-                return null;
-            }
-        });
-    }
 }
-
-//smg
