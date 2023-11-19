@@ -1,0 +1,28 @@
+{
+  "name": "selection",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mingyu27/Selection.git"
+  },
+  "author": "seongmingyu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mingyu27/Selection/issues"
+  },
+  "homepage": "https://github.com/mingyu27/Selection#readme",
+  "dependencies": {
+    "firebase-admin": "^11.11.0",
+    "request-promise": "^0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0"
+  }
+}
