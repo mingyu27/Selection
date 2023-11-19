@@ -17,7 +17,7 @@ public class AddCardAlert extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.goToEnrollCardButton.setOnClickListener(view -> {
-            startActivity(new Intent(AddCardAlert.this, AddCardSelectCompany.class));
+            startActivity(new Intent(AddCardAlert.this, AddCardChooseCompany.class));
             finish();
         });
     }

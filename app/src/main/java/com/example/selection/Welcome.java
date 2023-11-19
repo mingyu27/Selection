@@ -8,37 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.selection.databinding.ActivityLoginBinding;
 import com.example.selection.databinding.ActivityWelcomeBinding;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.functions.FirebaseFunctions;
 import com.google.firebase.functions.HttpsCallableResult;
-import com.kakao.sdk.auth.AuthCodeClient;
 import com.kakao.sdk.auth.model.OAuthToken;
-import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.User;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 public class Welcome extends AppCompatActivity {
@@ -56,6 +40,7 @@ public class Welcome extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("user", currentUser));
+            finish();
         }
 
     }
@@ -89,9 +74,9 @@ public class Welcome extends AppCompatActivity {
         joinButton = binding.joinWithLocal;
 
 
-        loginButton.setOnClickListener(v -> {startActivity(new Intent(Welcome.this, LoginPage.class));});
+        loginButton.setOnClickListener(v -> {startActivity(new Intent(Welcome.this, WelcomeLogin.class));});
 
-        joinButton.setOnClickListener(v -> {startActivity(new Intent(Welcome.this, Join.class));});
+        joinButton.setOnClickListener(v -> {startActivity(new Intent(Welcome.this, WelcomeJoin.class));});
 
         //카카오톡 or 카카오계정으로 로그인
         loginWithKakaoButton.setOnClickListener(view -> {
