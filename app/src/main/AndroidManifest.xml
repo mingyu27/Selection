@@ -30,6 +30,9 @@
             android:name=".Menu"
             android:exported="false" />
         <activity
+            android:name=".MenuPage"
+            android:exported="false" />
+        <activity
             android:name=".LoginPage"
             android:exported="false" />
         <activity
