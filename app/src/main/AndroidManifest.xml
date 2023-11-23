@@ -28,6 +28,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".FunctionIOKookmin"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Welcome"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
@@ -51,14 +60,14 @@
             android:exported="false" />
         <activity
             android:name=".AddCardChooseCard"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainLocationChooseActivity"
             android:exported="false"
             android:theme="@style/NewDialogStyle" />
         <activity
             android:name=".AddCardChooseCompany"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".WelcomeJoin"
             android:exported="false"

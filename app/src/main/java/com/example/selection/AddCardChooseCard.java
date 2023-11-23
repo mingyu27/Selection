@@ -26,7 +26,7 @@ public class AddCardChooseCard extends AppCompatActivity {
         binding = ActivityAddCardChooseCardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //카드명, 카드사진 초기화
+//        카드명, 카드사진 초기화
         companyToEnrollList = (ArrayList<String>) getIntent().getSerializableExtra("CompanyToEnrollList");
         companyNameToEnroll = companyToEnrollList.remove(0);
         binding.companyNameText.setText(companyNameToEnroll);
