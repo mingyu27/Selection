@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.selection.databinding.ActivityLoginBinding;
-import com.example.selection.databinding.ActivityLoginPageBinding;
 import com.example.selection.databinding.ActivityWelcomeLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
