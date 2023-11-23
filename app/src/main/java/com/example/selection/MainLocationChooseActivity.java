@@ -1,10 +1,6 @@
 package com.example.selection;
 
 
-import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.widget.NumberPicker;
 
@@ -12,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.selection.databinding.ActivityLocationChooseDialogBinding;
 
-public class LocationChooseDialog extends AppCompatActivity {
+public class MainLocationChooseActivity extends AppCompatActivity {
     private ActivityLocationChooseDialogBinding binding;
     String selectedBusinessType;
     String selectedStore;

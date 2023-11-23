@@ -85,6 +85,8 @@ public class Welcome extends AppCompatActivity {
             } else {UserApiClient.getInstance().loginWithKakaoAccount(Welcome.this, callback);}
         });
 
+
+
 //        로그아웃버튼
 //        logoutButton.setOnClickListener(view -> UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
 //            @Override
@@ -94,7 +96,6 @@ public class Welcome extends AppCompatActivity {
 //            }
 //        }));
     }
-
 
 
 

@@ -88,18 +88,13 @@ dependencies {
     implementation ("com.google.firebase:firebase-functions:20.4.0")
 
 
-//    //카카오 파이어베이스 연동
-//    implementation ("com.kakao.sdk:v2-user-rx:2.0.0-beta02")
-//    implementation ("io.reactivex.rxjava2:rxjava:2.2.17")
-//    implementation ("com.squareup.retrofit2:converter-gson:2.7.1")
-//    implementation ("com.squareup.retrofit2:retrofit:2.7.1")
-//    implementation ("com.squareup.okhttp3:okhttp:4.3.1")
-//    implementation ("com.squareup.okhttp3:logging-interceptor:4.3.1")
-//    implementation ("com.google.firebase:firebase-auth:19.1.0")
-//    implementation ("com.google.firebase:firebase-firestore:21.4.0")
-//    implementation ("com.google.firebase:firebase-firestore-ktx:21.4.0")
-//    implementation ("org.koin:koin-androidx-viewmodel:2.0.1")
+    // Declare the dependency for the Cloud Firestore library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-firestore")
 
-    
+
+    // FirebaseUI for Cloud Firestore
+    implementation ("com.firebaseui:firebase-ui-firestore:8.0.0")
+    implementation ("androidx.paging:paging-runtime:3.2.1")
 
 }
