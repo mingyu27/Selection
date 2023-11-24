@@ -115,6 +115,7 @@
                 android:src="@drawable/shinhan_logo"/>
 
             <Button
+                android:id="@+id/save_card"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

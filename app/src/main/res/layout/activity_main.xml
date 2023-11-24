@@ -8,11 +8,12 @@
         android:layout_height="50dp">
 
         <TextView
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SELECTION"
             android:layout_centerInParent="true"
-            android:textSize="25sp"/>
+            android:text="SELECTION"
+            android:textSize="25sp" />
 
         <ImageView
             android:layout_width="30dp"

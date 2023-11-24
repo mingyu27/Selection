@@ -16,15 +16,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class WelcomeLogin extends AppCompatActivity {
     private ActivityWelcomeLoginBinding binding;
     private String userId , userPassword;
     private FirebaseAuth mAuth;
-    private static final String TAG = "EmailPassword";
+    private static final String TAG = "SMG";
     public void showToast(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
+    private FunctionUser functionUser;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class WelcomeLogin extends AppCompatActivity {
         binding = ActivityWelcomeLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         EditText ID = findViewById(R.id.ID);
         EditText PASSWORD = findViewById(R.id.PASSWORD);
@@ -69,15 +75,29 @@ public class WelcomeLogin extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // updateUI(user);
-                            startActivity(new Intent(WelcomeLogin.this, AddCardChooseCompany.class));
+
+                            //user.getUid()로,,firestore에 일치하는uid의 functionuser를 받아오기
+
+                            db.collection("User")
+                                    .whereEqualTo("uid", user.getUid())
+                                    .get()
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task1.getResult()) {
+                                                functionUser = document.toObject(FunctionUser.class);
+                                                startActivity(new Intent(WelcomeLogin.this, AddCardAlert.class).putExtra("functionUser", functionUser));
+                                            }
+                                        } else {
+                                            Log.d(TAG, "Error getting documents: ", task1.getException());
+                                        }
+                                    });
+
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Log.d(TAG, "signInWithEmail:failure");
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
                     }
                 });

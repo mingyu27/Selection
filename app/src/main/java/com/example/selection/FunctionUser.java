@@ -1,8 +1,12 @@
 package com.example.selection;
 
-import java.util.ArrayList;
+import org.apache.commons.lang3.ArrayUtils;
 
-public class FunctionUser {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class FunctionUser implements Serializable {
     private String uid;
     private String name;
     private boolean availableDiscountAmusement;
@@ -17,6 +21,9 @@ public class FunctionUser {
     private ArrayList<Integer> likedShinhan;
     private ArrayList<Integer> savedKookmin;
     private ArrayList<Integer> savedShinhan;
+
+    public FunctionUser(){}
+
 
     public FunctionUser(String uid, String name, boolean availableDiscountAmusement, boolean availableDiscountBakery, boolean availableDiscountBookStore, boolean availableDiscountCafe, boolean availableDiscountConvenientStore, boolean availableDiscountFastFood, boolean availableDiscountRestaurant, boolean availableDiscountTheater, ArrayList<Integer> likedKookmin, ArrayList<Integer> likedShinhan, ArrayList<Integer> savedKookmin, ArrayList<Integer> savedShinhan) {
         this.uid = uid;
@@ -34,6 +41,7 @@ public class FunctionUser {
         this.savedKookmin = savedKookmin;
         this.savedShinhan = savedShinhan;
     }
+
 
     public String getUid() {
         return uid;

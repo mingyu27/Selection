@@ -16,17 +16,24 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
 
 
 public class WelcomeJoin extends AppCompatActivity {
 
     private ActivityWelcomeJoinBinding binding;
     private String userName, userId, userPassword, userPasswordAgain;
-    private static final String TAG = "EmailPassword";
+    private static final String TAG = "SMG";
     private FirebaseAuth mAuth;
     private void showToast(String str){
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
+    private FunctionUser functionUser;
+    private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +41,7 @@ public class WelcomeJoin extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         EditText Id = findViewById(R.id.id_join);
         EditText Password = findViewById(R.id.password_join);
 
@@ -60,28 +68,66 @@ public class WelcomeJoin extends AppCompatActivity {
                 else if(userPassword.equals(userPasswordAgain)){
                     binding.passwordcheckJoin.setVisibility(View.INVISIBLE);
                     signUp(userId, userPassword);
-                    startActivity(new Intent(WelcomeJoin.this, Welcome.class));
+
                 }
             }
         });
     }
+
+    //신규가입,,이름,uid로 FunctionUser초기화해서,,firestore에 저장,, putExtra로 MainActivity로 넘김
     private void signUp(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isComplete()) {
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
                         if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //  updateUI(user);
+                            functionUser = new FunctionUser(
+                                    user.getUid(), userName, false, false, false, false,
+                                    false, false, false, false,
+                                    new ArrayList<Integer>(), new ArrayList<Integer>(),
+                                    new ArrayList<Integer>(), new ArrayList<Integer>());
+                            CollectionReference userReference = db.collection("User");
+                            userReference.document("email"+userName).set(functionUser);
+
+                            // 외부에서 functionUser 사용 가능
+                            onSignUpSuccess(functionUser);
                         } else {
+                            // If sign in fails, display a message to the user.
                             Log.d(TAG, "createUserWithEmail:failure");
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //  updateUI(null);
+
+                            // 실패 시 처리
+                            onSignUpFailure();
                         }
                     }
                 });
+
+
+    }
+
+
+    // 사용자 생성 성공 시 호출되는 함수
+    private void onSignUpSuccess(FunctionUser functionUser) {
+        // 외부에서 functionUser 사용 가능
+        Log.d(TAG, "User created successfully: " + functionUser.getName());
+        startActivity(new Intent(this, AddCardAlert.class).putExtra("functionUser", functionUser));
+    }
+
+    // 사용자 생성 실패 시 호출되는 함수
+    private void onSignUpFailure() {
+        Log.d(TAG, "User creation failed");
     }
 //    private void updateUI(FirebaseUser user) {
 //        if (user != null) {
