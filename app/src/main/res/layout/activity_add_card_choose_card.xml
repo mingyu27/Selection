@@ -145,25 +145,28 @@
             android:layout_marginBottom="10dp"
             android:textColor="@color/gray"/>
 
-        <GridLayout
+
+
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:rowCount="1">
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:id="@+id/linear_layout_for_saved_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:rowCount="1"
+                android:gravity="left">
+            </LinearLayout>
 
-            <ImageView android:src="@drawable/shinhan_logo" android:layout_width="100dp"></ImageView>
-            <ImageView android:src="@drawable/shinhan_logo" android:layout_width="100dp"></ImageView>
-            <ImageView android:src="@drawable/shinhan_logo" android:layout_width="100dp"></ImageView>
-            <ImageView android:src="@drawable/shinhan_logo" android:layout_width="100dp"></ImageView>
-            <ImageView android:src="@drawable/shinhan_logo" android:layout_width="100dp"></ImageView>
-
-
-
-        </GridLayout>
-
+        </HorizontalScrollView>
 
 
     </LinearLayout>
+
+
 
 
     <LinearLayout

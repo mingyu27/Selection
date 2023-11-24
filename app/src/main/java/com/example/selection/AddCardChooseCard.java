@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ public class AddCardChooseCard extends AppCompatActivity {
     private ArrayList<Integer> savedCardIndexArrayList;
     private static final String TAG = "SMG";
     private FirebaseFirestore db;
+    private LinearLayout linearLayout;
 
 
 
@@ -35,6 +40,7 @@ public class AddCardChooseCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddCardChooseCardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        linearLayout = binding.linearLayoutForSavedCard;
 
 
 
@@ -102,7 +108,18 @@ public class AddCardChooseCard extends AppCompatActivity {
         //임시리스트에 카드번호 추가
         binding.saveCard.setOnClickListener(view -> {
             savedCardIndexArrayList.add(selectedCardIndex);
+            ImageView imageView = new ImageView(this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, ViewGroup.LayoutParams.MATCH_PARENT);
+            layoutParams.setMargins(5, 0, 0, 0);
+            imageView.setLayoutParams(layoutParams);
+
+
+            imageView.setImageResource(typedArray.getResourceId(selectedCardIndex, -1));
+            imageView.setAdjustViewBounds(true);
+            linearLayout.addView(imageView);
         });
+
+
 
 
     }
