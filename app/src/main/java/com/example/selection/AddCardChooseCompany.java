@@ -47,7 +47,8 @@ public class AddCardChooseCompany extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         if(v == binding.goNextButton){
             Log.d("SMG", "YES");
-            startActivity(new Intent(AddCardChooseCompany.this, AddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));}
+           // startActivity(new Intent(AddCardChooseCompany.this, AddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
+             }
         else if(v == binding.shinhanButton){
             if(isSelectedShinhan == false){companyToEnrollList.add("신한");binding.shinhanButton.setBackgroundResource(R.drawable.round_bold); isSelectedShinhan = true;}
             else{companyToEnrollList.remove("신한"); binding.shinhanButton.setBackgroundResource(R.drawable.round); isSelectedShinhan = false;}
