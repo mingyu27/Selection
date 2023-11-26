@@ -63,6 +63,9 @@
             android:name=".AddCardChooseCompany"
             android:exported="false" />
         <activity
+            android:name=".MenuPossessCard"
+            android:exported="true" />
+        <activity
             android:name=".WelcomeJoin"
             android:exported="false"
             android:label="@string/title_activity_join"
