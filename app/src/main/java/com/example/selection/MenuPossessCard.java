@@ -37,16 +37,24 @@ public class MenuPossessCard extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+
+
+
     private class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView imageView;
         public MyViewHolder(@NonNull View itemview){
-
             super(itemview);
             textView = itemview.findViewById(R.id.textview);
             imageView = itemview.findViewById(R.id.imageview);
         }
     }
+
+
+
+
+
     private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         Context context;
@@ -69,7 +77,7 @@ public class MenuPossessCard extends AppCompatActivity {
             Item item = items.get(position);
             Log.d("YJH", "onBindViewHolder");
             holder.textView.setText(item.getText());
-            holder.imageView.setImageResource(item.getImg());
+             holder.imageView.setImageResource(item.getImg());
         }
         @Override
         public int getItemCount() {
@@ -77,6 +85,10 @@ public class MenuPossessCard extends AppCompatActivity {
         }
     }
 }
+
+
+
+
 
 class Item{
     private String text;
