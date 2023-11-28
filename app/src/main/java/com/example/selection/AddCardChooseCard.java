@@ -74,7 +74,6 @@ public class AddCardChooseCard extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 binding.selectedCardImage.setImageResource(typedArray.getResourceId(newVal, -1));
                 selectedCardIndex = newVal;
-                Log.d(TAG, selectedCardIndex + "");
             }
         });
 
@@ -89,10 +88,11 @@ public class AddCardChooseCard extends AppCompatActivity {
             //만약 저장이 다됐다면
             if(companyToEnrollList.isEmpty()){
                 CollectionReference userReference = db.collection("User");
-                userReference.document((functionUser.getUid().contains("kakao"))?"kakao"+functionUser.getName():"email"+functionUser.getName()).set(functionUser);
+
 
                 startActivity(new Intent(AddCardChooseCard.this, MainActivity.class).putExtra("functionUser", functionUser));
-                Toast.makeText(this, "카드가 모두 정상적으로 등록됐습니다.", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "카드가 모두 정상적으로 등록됐습니다.", Toast.LENGTH_SHORT).show();
+                userReference.document((functionUser.getUid().contains("kakao"))?"kakao"+functionUser.getName():"email"+functionUser.getName()).set(functionUser);
             }
             else {
                 startActivity(new Intent(AddCardChooseCard.this, AddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
