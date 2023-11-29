@@ -16,7 +16,7 @@
 
     <NumberPicker
         android:theme="@style/NumberPickerTheme"
-        android:id="@+id/pick_business_type_list"
+        android:id="@+id/categoryPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -30,7 +30,7 @@
 
     <NumberPicker
         android:theme="@style/NumberPickerTheme"
-        android:id="@+id/pick_store_list"
+        android:id="@+id/storePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

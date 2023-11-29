@@ -214,11 +214,11 @@
         <item>kb pay 머니백카드</item>
         <item>kb국민 국민행복체크</item>
         <item>kb국민 우리동네 체크카드</item>
-        <item>kb국민 티머니노리 학생증 체크카드 (블루-세로형)</item>
         <item>kb국민 티머니노리 학생증체크카드(그린)</item>
         <item>kb국민 티머니노리 학생증체크카드(블루)</item>
-        <item>kb국민 티머니노리 학생증체크카드(세로형_그린)</item>
-        <item>kb국민 티머니노리 학생증체크카드(세로형_퍼플)</item>
+        <item>kb국민 티머니노리 학생증체크카드(세로형-그린)</item>
+        <item>kb국민 티머니노리 학생증체크카드(세로형-블루)</item>
+        <item>kb국민 티머니노리 학생증체크카드(세로형-퍼플)</item>
         <item>kb국민 티머니노리 학생증체크카드(퍼플)</item>
         <item>lg u+체크카드</item>
         <item>liiv M 체크카드</item>
@@ -273,10 +273,10 @@
         <item>@drawable/kookmin2</item>
         <item>@drawable/kookmin3</item>
         <item>@drawable/kookmin4</item>
-        <item>@drawable/kookmin5</item>
         <item>@drawable/kookmin6</item>
         <item>@drawable/kookmin7</item>
         <item>@drawable/kookmin8</item>
+        <item>@drawable/kookmin5</item>
         <item>@drawable/kookmin9</item>
         <item>@drawable/kookmin10</item>
         <item>@drawable/kookmin11</item>

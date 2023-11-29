@@ -97,4 +97,16 @@ dependencies {
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.0")
     implementation ("androidx.paging:paging-runtime:3.2.1")
 
+    //location!!
+    implementation ("com.android.volley:volley:1.2.1")
+    implementation ("com.google.code.gson:gson:2.8.9")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.google.code.gson:gson:2.8.8")
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.1")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }
