@@ -54,16 +54,13 @@
             android:exported="false" />
         <activity
             android:name=".AddCardChooseCard"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainLocationChooseActivity"
             android:exported="false"
             android:theme="@style/NewDialogStyle" />
         <activity
             android:name=".AddCardChooseCompany"
-            android:exported="false" />
-        <activity
-            android:name=".MenuPossessCard"
             android:exported="true" />
         <activity
             android:name=".WelcomeJoin"
@@ -72,7 +69,7 @@
             android:theme="@style/Theme.Selection" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
