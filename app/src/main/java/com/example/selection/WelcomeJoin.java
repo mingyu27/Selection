@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
@@ -122,7 +121,7 @@ public class WelcomeJoin extends AppCompatActivity {
     private void onSignUpSuccess(FunctionUser functionUser) {
         // 외부에서 functionUser 사용 가능
         Log.d(TAG, "User created successfully: " + functionUser.getName());
-        startActivity(new Intent(this, AddCardAlert.class).putExtra("functionUser", functionUser));
+        startActivity(new Intent(this, WelcomeAddCardAlert.class).putExtra("functionUser", functionUser));
     }
 
     // 사용자 생성 실패 시 호출되는 함수

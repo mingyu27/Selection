@@ -23,7 +23,8 @@ public class MenuPossessCard extends AppCompatActivity {
     RecyclerView recyclerView;
     //MyAdapter adapter;
     ImageView button;
-    ArrayList<Item> items = new ArrayList<>(); //카드 사진, 이름 저장할 ArrayList
+    ArrayList<FunctionItemCard> items = new ArrayList<>(); //카드 사진, 이름 저장할 ArrayList
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +32,15 @@ public class MenuPossessCard extends AppCompatActivity {
         setContentView(R.layout.activity_menu_possess_card);
         button = findViewById(R.id.possess_back_button);
 
-        items.add(new Item("A",R.drawable.kookmin16));
-        items.add(new Item("B",R.drawable.kookmin6));
-        items.add(new Item("C",R.drawable.kookmin42));
-        items.add(new Item("D",R.drawable.shinhancard5));
-        items.add(new Item("E",R.drawable.shinhancard22));
+        items.add(new FunctionItemCard("A", R.drawable.kookmin16));
+        items.add(new FunctionItemCard("B", R.drawable.kookmin6));
+        items.add(new FunctionItemCard("C", R.drawable.kookmin42));
+        items.add(new FunctionItemCard("D", R.drawable.shinhancard5));
+        items.add(new FunctionItemCard("E", R.drawable.shinhancard22));
 
         recyclerView = findViewById(R.id.recyclerview);
         //adapter = new MyAdapter(this,items);
-        recyclerView.setAdapter(new MyAdapter(this,items));
+        recyclerView.setAdapter(new MyAdapter(this, items));
         //recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         button.setOnClickListener(new View.OnClickListener() {
@@ -53,56 +54,47 @@ public class MenuPossessCard extends AppCompatActivity {
     private class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         ImageView imageView;
-        public MyViewHolder(@NonNull View itemview){
+
+        public MyViewHolder(@NonNull View itemview) {
 
             super(itemview);
             textView = itemview.findViewById(R.id.textview);
             imageView = itemview.findViewById(R.id.imageview);
         }
     }
+
     private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         Context context;
-        ArrayList<Item> items;
-        public MyAdapter(Context context, ArrayList<Item> items){
+        ArrayList<FunctionItemCard> items;
+
+        public MyAdapter(Context context, ArrayList<FunctionItemCard> items) {
             this.context = context;
             this.items = items;
         }
+
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Log.d("YJH", "onCreateViewHolder");
-            View itemview = LayoutInflater.from(context).inflate(R.layout.itemview,parent,false);
+            View itemview = LayoutInflater.from(context).inflate(R.layout.itemview, parent, false);
             //itemview.xml은 RecyclerView에 반복해서 띄울 Layout
             MyViewHolder holder = new MyViewHolder(itemview);
             return holder;
         }
+
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position){
-            Item item = items.get(position);
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            FunctionItemCard item = items.get(position);
             Log.d("YJH", "onBindViewHolder");
             holder.textView.setText(item.getText());
             holder.imageView.setImageResource(item.getImg());
         }
+
         @Override
         public int getItemCount() {
             return items.size();
         }
     }
 
-}
-
-class Item{
-    private String text;
-    private int img;
-    public Item(String text, int img){
-        this.text = text;
-        this.img = img;
-    }
-    public String getText(){
-        return text;
-    }
-    public int getImg(){
-        return img;
-    }
 }

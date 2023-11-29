@@ -32,9 +32,13 @@
 
     <style name="NewDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/main_color</item>
-        <item name="android:windowMinWidthMajor">95%</item>
-        <item name="android:windowMinWidthMinor">95%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:windowTitleStyle">@style/DialogTitleStyle</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
+    <style name="DialogTitleStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
 
 </resources>

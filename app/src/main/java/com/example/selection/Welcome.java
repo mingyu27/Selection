@@ -11,13 +11,11 @@ import android.view.View;
 
 import com.example.selection.databinding.ActivityWelcomeBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -177,7 +175,7 @@ public class Welcome extends AppCompatActivity {
                                         new ArrayList<Integer>(), new ArrayList<Integer>());
                                 CollectionReference userReference = db.collection("User");
                                 userReference.document("kakao"+userName).set(functionUser);
-                    startActivity(new Intent(Welcome.this, AddCardAlert.class).putExtra("functionUser", functionUser));
+                    startActivity(new Intent(Welcome.this, WelcomeAddCardAlert.class).putExtra("functionUser", functionUser));
                 }
 
 

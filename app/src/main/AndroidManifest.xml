@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddCardAlert"
+            android:name=".WelcomeAddCardAlert"
             android:exported="false" />
         <activity
             android:name=".MenuPossessCard"
@@ -56,14 +56,14 @@
             android:name=".WelcomeLogin"
             android:exported="false" />
         <activity
-            android:name=".AddCardChooseCard"
+            android:name=".WelcomeAddCardChooseCard"
             android:exported="true" />
         <activity
             android:name=".MainLocationChooseDialog"
             android:exported="true"
             android:theme="@style/NewDialogStyle" />
         <activity
-            android:name=".AddCardChooseCompany"
+            android:name=".WelcomeAddCardChooseCompany"
             android:exported="true" />
         <activity
             android:name=".WelcomeJoin"

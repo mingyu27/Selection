@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.example.selection.databinding.ActivityAddCardAlertBinding;
 
-public class AddCardAlert extends AppCompatActivity {
+public class WelcomeAddCardAlert extends AppCompatActivity {
     private ActivityAddCardAlertBinding binding;
     private FunctionUser functionUser;
     private final String TAG = "SMG";
@@ -23,12 +23,12 @@ public class AddCardAlert extends AppCompatActivity {
 
 
         binding.goToEnrollCardButton.setOnClickListener(view -> {
-            startActivity(new Intent(AddCardAlert.this, AddCardChooseCompany.class).putExtra("functionUser", functionUser));
+            startActivity(new Intent(WelcomeAddCardAlert.this, WelcomeAddCardChooseCompany.class).putExtra("functionUser", functionUser));
             finish();
         });
 
         binding.cancelGoToMainAcitivy.setOnClickListener(view -> {
-            startActivity(new Intent(AddCardAlert.this, MainActivity.class).putExtra("functionUser", functionUser));
+            startActivity(new Intent(WelcomeAddCardAlert.this, MainActivity.class).putExtra("functionUser", functionUser));
             finish();
         });
     }

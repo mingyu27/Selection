@@ -1,6 +1,7 @@
 package com.example.selection;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -44,6 +45,9 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
     private FusedLocationProviderClient fusedLocationClient;
     private ActivityMainLocationChooseDialogBinding binding;
+    private List<String> storeNameList;
+    private String selectedStoreName;
+    private String searchedStoreName;
 
 
 
@@ -80,9 +84,10 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
         categoryPicker = binding.categoryPicker;
         storePicker = binding.storePicker;
+        searchedStoreName = binding.searchStoreName.getText().toString();
 
 
-        final String[] categoryList = {"커피", "편의점", "패스트푸드점", "음식점", "영화관", "베이커리", "서점", "놀이공원"};
+        final String[] categoryList = {"커피", "편의점", "패스트푸드", "음식점", "영화관", "베이커리", "서점", "놀이공원"};
         categoryPicker.setMinValue(0);
         categoryPicker.setMaxValue(categoryList.length-1);
         categoryPicker.setDisplayedValues(categoryList);
@@ -100,6 +105,8 @@ public class MainLocationChooseDialog extends AppCompatActivity {
         } else {
             Log.d("SMG", "BAD");
         }
+
+
 
         //카테고리 선택시
         categoryPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -121,9 +128,24 @@ public class MainLocationChooseDialog extends AppCompatActivity {
         storePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-
+                selectedStoreName = storeNameList.get(newVal);
             }
         });
+
+
+        //직접검색시
+
+        binding.cancelToMainAcitivity.setOnClickListener(view -> {
+            setResult(RESULT_OK, new Intent().putExtra("storeName", ""));
+            finish();
+
+        });
+
+        binding.saveLocationToMainActivity.setOnClickListener(view -> {
+            setResult(RESULT_OK, new Intent().putExtra("storeName", selectedStoreName));
+            finish();
+        });
+
 
 
 
@@ -194,6 +216,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
     }
 
 
+
     //asyntask를 기반으로 background에서 인자로 받아온,,카테고리코드, 위도, 경도로,,,restapi요청실행,,,response가지고 parseStoreResponse실행
     private class FetchStoresTask extends AsyncTask<String, Void, String> {
 
@@ -259,32 +282,31 @@ public class MainLocationChooseDialog extends AppCompatActivity {
             JSONArray storesArray = jsonResponse.getJSONArray("documents");
 
             // 매장 정보를 담을 리스트
-            List<Store> storeList = new ArrayList<>();
-            List<String> storeNameList = new ArrayList<>();
+            List<FunctionStore> storeList = new ArrayList<>();
+            storeNameList = new ArrayList<>();
 
             for (int i = 0; i < storesArray.length(); i++) {
                 //매장명, 거리 정보 파싱하기
                 JSONObject storeObject = storesArray.getJSONObject(i);
                 String storeName = storeObject.getString("place_name");
-                String storeDistance = storeObject.getString("distance");
+//                String storeDistance = storeObject.getString("distance");
 
-                Log.d(TAG, storeName+" " + storeDistance);
 
                 // Store 객체 생성 및 리스트에 추가
-                Store store = new Store(storeName, Double.parseDouble(storeDistance));
+                FunctionStore store = new FunctionStore(storeName);
                 storeList.add(store);
             }
 
             // 거리순으로 정렬
-            Collections.sort(storeList, new Comparator<Store>() {
-                @Override
-                public int compare(Store s1, Store s2) {
-                    return Double.compare(s1.getDistance(), s2.getDistance());
-                }
-            });
+//            Collections.sort(storeList, new Comparator<Store>() {
+//                @Override
+//                public int compare(Store s1, Store s2) {
+//                    return Double.compare(s1.getDistance(), s2.getDistance());
+//                }
+//            });
 
             // storeList에 매장명만 추가
-            for (Store store : storeList) {
+            for (FunctionStore store : storeList) {
                 storeNameList.add(store.getName());
             }
 
@@ -300,23 +322,6 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
 
 
-    // Store 클래스 정의
-    private static class Store {
-        private String name;
-        private double distance;
-
-        public Store(String name, double distance) {
-            this.name = name;
-            this.distance = distance;
-        }
-
-        public String getName() {
-            return name;
-        }
-        public double getDistance() {
-            return distance;
-        }
-    }
 
 
 

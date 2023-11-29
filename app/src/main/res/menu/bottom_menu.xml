@@ -12,7 +12,7 @@
         android:icon="@drawable/baseline_credit_card_24"
         android:title="내 카드" />
     <item
-        android:id="@+id/dips_card"
+        android:id="@+id/liked_card"
         android:enabled="true"
         android:icon="@drawable/baseline_favorite_24"
         android:title="찜한 카드" />

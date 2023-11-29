@@ -1,10 +1,15 @@
 package com.example.selection;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -16,47 +21,58 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FunctionUser functionUser;
+    private BottomNavigationView bottomNavigationView;
+    private String storeName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
+        bottomNavigationView = binding.bottomNavigation;
+        transferTo(MenuRecommendCardFragment.newInstance("param1", "param2"));
 
-//        functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
-//
-//        binding.username.setText(functionUser.getName());
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult o) {
+                        if (o.getResultCode() == RESULT_OK){
+                            storeName = o.getData().getStringExtra("storeName");
+                        }
 
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
-        //getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new Setting_InformationFragment()).commit();
-        transferTo(MainFragment.newInstance("param1", "param2"));
-        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                    }
+                });
+
+        launcher.launch((new Intent(this, MainLocationChooseDialog.class)));
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemID = item.getItemId();
 
                 if(itemID == R.id.home){
-                    transferTo(MainFragment.newInstance("param1","param2"));
+                    transferTo(MenuRecommendCardFragment.newInstance("param1","param2"));
                     return true;
                 }
                 if(itemID == R.id.my_card){
-                  //  Log.d("YJH","my_card_menu");
-                    transferTo(menu_possess_cardFragment.newInstance("param1","param2"));
+                    transferTo(MenuSavedCardFragment.newInstance("param1","param2"));
                     return true;
                 }
-                if(itemID == R.id.dips_card){
-                    transferTo(Dips_CardFragment.newInstance("param1","param2"));
+                if(itemID == R.id.liked_card){
+                    transferTo(MenuLikedCardFragment.newInstance("param1","param2"));
                     return true;
                 }
                 if(itemID == R.id.add_card){
-                    transferTo(Add_CardFragment.newInstance("param1","param2"));
+                    transferTo(MenuAddCardChooseCompanyFragment.newInstance("param1","param2"));
                     return true;
                 }
                 return false;
             }
         });
 
-        navigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+        bottomNavigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
 
@@ -65,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void transferTo(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(binding.fragmentContainer.getId(), fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

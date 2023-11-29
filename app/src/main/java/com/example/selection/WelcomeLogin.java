@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class WelcomeLogin extends AppCompatActivity {
     private ActivityWelcomeLoginBinding binding;
@@ -85,7 +84,7 @@ public class WelcomeLogin extends AppCompatActivity {
                                         if (task1.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task1.getResult()) {
                                                 functionUser = document.toObject(FunctionUser.class);
-                                                startActivity(new Intent(WelcomeLogin.this, AddCardAlert.class).putExtra("functionUser", functionUser));
+                                                startActivity(new Intent(WelcomeLogin.this, WelcomeAddCardAlert.class).putExtra("functionUser", functionUser));
                                             }
                                         } else {
                                             Log.d(TAG, "Error getting documents: ", task1.getException());

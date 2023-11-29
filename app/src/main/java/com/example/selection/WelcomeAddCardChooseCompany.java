@@ -12,7 +12,7 @@ import com.example.selection.databinding.ActivityAddCardChooseCompanyBinding;
 
 import java.util.ArrayList;
 
-public class AddCardChooseCompany extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeAddCardChooseCompany extends AppCompatActivity implements View.OnClickListener {
 
     private ActivityAddCardChooseCompanyBinding binding;
     private ArrayList<String> companyToEnrollList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class AddCardChooseCompany extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         if(v == binding.goNextButton){
             Log.d("SMG", "YES");
-            startActivity(new Intent(AddCardChooseCompany.this, AddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
+            startActivity(new Intent(WelcomeAddCardChooseCompany.this, WelcomeAddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
              }
         else if(v == binding.shinhanButton){
             if(isSelectedShinhan == false){companyToEnrollList.add("신한");binding.shinhanButton.setBackgroundResource(R.drawable.round_bold); isSelectedShinhan = true;}
