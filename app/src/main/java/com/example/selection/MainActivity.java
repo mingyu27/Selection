@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 if(itemID == R.id.add_card){
-
+                    transferTo(Add_CardFragment.newInstance("param1","param2"));
+                    return true;
                 }
                 return false;
             }
