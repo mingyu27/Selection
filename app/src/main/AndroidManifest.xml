@@ -31,15 +31,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FunctionIOKookmin"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Welcome"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
@@ -52,6 +43,9 @@
         <activity
             android:name=".AddCardAlert"
             android:exported="false" />
+        <activity
+            android:name=".MenuPossessCard"
+            android:exported="true" />
         <activity
             android:name=".SettingsPwChange"
             android:exported="false" />
@@ -72,16 +66,13 @@
             android:name=".AddCardChooseCompany"
             android:exported="true" />
         <activity
-            android:name=".MenuPossessCard"
-            android:exported="true" />
-        <activity
             android:name=".WelcomeJoin"
             android:exported="false"
             android:label="@string/title_activity_join"
             android:theme="@style/Theme.Selection" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
