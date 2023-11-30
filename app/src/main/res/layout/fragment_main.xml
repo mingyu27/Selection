@@ -10,7 +10,6 @@
         android:layout_height="50dp">
 
         <TextView
-            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -18,9 +17,10 @@
             android:textSize="25sp" />
 
         <ImageView
+            android:id="@+id/information_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="#FF2"
+            android:src="@drawable/baseline_dehaze_24"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"/>
@@ -32,7 +32,6 @@
         android:background="@color/gray">
 
         <TextView
-            android:id="@+id/selected_store_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

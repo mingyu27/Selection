@@ -59,6 +59,6 @@ public class MenuLikedCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dips__card, container, false);
+        return inflater.inflate(R.layout.fragment_menu_liked_card, container, false);
     }
 }

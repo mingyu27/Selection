@@ -1,14 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuAddCardChooseCompanyFragment">
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_weight="2.8"
+        android:gravity="bottom">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카드추가"
+            android:textStyle="bold"
+            android:textSize="40sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="보유 중인 카드사를 중복 선택해주세요."
+            android:textSize="17dp"
+            android:textColor="#7E7E7E" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3"
+            android:orientation="horizontal"
+            android:useDefaultMargins="true">
+
+            <LinearLayout
+                android:id="@+id/shinhan_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/shinhancard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="신한카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/kookmin_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/kookmincard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="국민카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/samsung_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/samsungcard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="삼성카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hyundai_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/hyundaicard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="현대카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nonghyup_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/nonghyupcard_logo"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="농협카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hana_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/hanacard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="하나카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lotte_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/lottecard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="롯데카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/woori_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/wooricard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="우리카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bc_button"
+                android:layout_columnWeight="1"
+                android:orientation="vertical"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/bccard_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BC카드"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </GridLayout>
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.7"
+        android:gravity="right|bottom">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/go_next_button">
+
+            <TextView
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다음"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/baseline_arrow_forward_ios_24"
+                android:background="@color/transparent"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
