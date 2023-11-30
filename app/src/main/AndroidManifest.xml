@@ -44,7 +44,7 @@
             android:name=".WelcomeAddCardAlert"
             android:exported="false" />
         <activity
-            android:name=".MenuPossessCard"
+            android:name=".MenuPossessCardFragment"
             android:exported="true" />
         <activity
             android:name=".SettingsPwChange"

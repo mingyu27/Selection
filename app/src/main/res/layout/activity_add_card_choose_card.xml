@@ -85,7 +85,7 @@
                 android:layout_gravity="center_horizontal"
                 android:theme="@style/NumberPickerTheme"
                 android:id="@+id/card_select_list"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"/>
 
 

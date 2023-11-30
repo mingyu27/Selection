@@ -66,7 +66,7 @@ public class MenuSavedCardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
-        Intent intent = new Intent(getActivity(),MenuPossessCard.class);
+        Intent intent = new Intent(getActivity(), MenuPossessCardFragment.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
     }

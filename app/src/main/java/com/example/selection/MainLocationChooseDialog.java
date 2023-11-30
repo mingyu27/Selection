@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -84,7 +85,6 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
         categoryPicker = binding.categoryPicker;
         storePicker = binding.storePicker;
-        searchedStoreName = binding.searchStoreName.getText().toString();
 
 
         final String[] categoryList = {"커피", "편의점", "패스트푸드", "음식점", "영화관", "베이커리", "서점", "놀이공원"};
@@ -134,6 +134,12 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
 
         //직접검색시
+        binding.searchLocationButton.setOnClickListener(view -> {
+            Log.d(TAG, "clicked");
+            fetchStores(urlEncode(binding.searchLocationEditText.getText().toString()));
+            binding.categoryLayout.setVisibility(View.INVISIBLE);
+
+        });
 
         binding.cancelToMainAcitivity.setOnClickListener(view -> {
             setResult(RESULT_OK, new Intent().putExtra("storeName", ""));
