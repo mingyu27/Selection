@@ -48,7 +48,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
     private ActivityMainLocationChooseDialogBinding binding;
     private List<String> storeNameList;
     private String selectedStoreName;
-    private String categoryName;
+    private String selectedCategoryName;
 
 
 
@@ -101,6 +101,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
         // 초기값("카페")으로 fetchStores 실행
         if (ContextCompat.checkSelfPermission(MainLocationChooseDialog.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fetchStores(urlEncode(categoryList[0]));
+            selectedCategoryName = categoryList[0];
         } else {}
 
 
@@ -114,9 +115,9 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                 if (ContextCompat.checkSelfPermission(MainLocationChooseDialog.this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     fetchStores(urlEncode(categoryList[newVal]));
-                    categoryName = categoryList[newVal];
-                    Log.d("SMG", "GOOD");
-                } else Log.d("SMG", "BAD");
+                    selectedCategoryName = categoryList[newVal];
+                    Log.d(TAG, "MainLocationChooseDialog selectedCategoryName is " + selectedCategoryName );
+                }
 
 
             }
@@ -147,7 +148,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
         binding.saveLocationToMainActivity.setOnClickListener(view -> {
             Intent resultIntent = new Intent();
-            resultIntent.putExtra("storeName", selectedStoreName).putExtra("category", categoryName);
+            resultIntent.putExtra("storeName", selectedStoreName).putExtra("category", selectedCategoryName);
             setResult(RESULT_OK, resultIntent);
             finish();
         });
@@ -180,7 +181,6 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                         Location lastLocation = task.getResult();
                         latitude = lastLocation.getLatitude();
                         longitude = lastLocation.getLongitude();
-                        Log.d(TAG, "MainLocationChooseDialog curretn Latitude: " + latitude + ", Longitude: " + longitude);
                     } else {
                         Log.e(TAG, "Failed to get location.");
                     }
@@ -293,27 +293,19 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                 //매장명, 거리 정보 파싱하기
                 JSONObject storeObject = storesArray.getJSONObject(i);
                 String storeName = storeObject.getString("place_name");
-//                String storeDistance = storeObject.getString("distance");
-
 
                 // Store 객체 생성 및 리스트에 추가
                 FunctionStore store = new FunctionStore(storeName);
                 storeList.add(store);
             }
 
-            // 거리순으로 정렬
-//            Collections.sort(storeList, new Comparator<Store>() {
-//                @Override
-//                public int compare(Store s1, Store s2) {
-//                    return Double.compare(s1.getDistance(), s2.getDistance());
-//                }
-//            });
+
 
             // storeList에 매장명만 추가
             for (FunctionStore store : storeList) {
                 storeNameList.add(store.getName());
             }
-
+            selectedStoreName = storeNameList.get(0);
             storePicker.setValue(0);
             storePicker.setDisplayedValues(storeNameList.toArray(new String[0]));
 

@@ -24,19 +24,10 @@
         <activity
             android:name=".MenuRecommendSavedCard"
             android:exported="false" />
-        <activity
-            android:name=".MenuSavedCardAddNewCcard"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".FunctionIOUser" -->
-        <!-- android:exported="false" /> -->
+
         <activity
             android:name=".FunctionIOShinhan"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".Welcome"
@@ -51,9 +42,6 @@
         <activity
             android:name=".WelcomeAddCardAlert"
             android:exported="false" />
-        <activity
-            android:name=".MenuPossessCardFragment"
-            android:exported="true" />
         <activity
             android:name=".SettingsPwChange"
             android:exported="false" />

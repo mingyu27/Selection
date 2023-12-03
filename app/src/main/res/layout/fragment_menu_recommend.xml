@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="60dp"
-                    android:text="default"
+                    android:text="혜택없음"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -91,7 +91,7 @@
                     android:layout_gravity="center"
                     android:gravity="end
 "
-                    android:text="defaultBenefit"
+                    android:text=""
                     android:textColor="@color/teal_200"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -102,8 +102,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="75dp"
                     android:layout_marginTop="70dp"
-                    android:rotation="90"
-                    android:src="@drawable/kookmin23" />
+                    android:rotation="90"/>
 
             </LinearLayout>
 
@@ -138,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="60dp"
-                    android:text="default"
+                    android:text="혜택없음"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -149,7 +148,7 @@
                     android:layout_gravity="center"
                     android:gravity="end
 "
-                    android:text="defaultBenefit"
+                    android:text=""
                     android:textColor="@color/teal_200"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -160,8 +159,7 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="75dp"
                     android:layout_marginTop="70dp"
-                    android:rotation="90"
-                    android:src="@drawable/kookmin23" />
+                    android:rotation="90"/>
 
             </LinearLayout>
 
@@ -194,7 +192,6 @@
             android:layout_width="140dp"
             android:layout_height="86dp"
             android:layout_gravity="left"
-            android:src="@drawable/kookmin12"
             android:layout_marginTop="11dp"/>
 
 

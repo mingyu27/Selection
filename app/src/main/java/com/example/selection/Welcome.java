@@ -40,17 +40,28 @@ public class Welcome extends AppCompatActivity {
     private String userName;
     private FunctionUser functionUser;
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null) {
-//            startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("user", currentUser));
-//            finish();
-//        }
-//
-//    }
+    public void onStart() {
+        super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        if(currentUser != null) {
+            db.collection("User")
+                    .whereEqualTo("uid", currentUser.getUid())
+                    .get()
+                    .addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task1.getResult()) {
+                                functionUser = document.toObject(FunctionUser.class);
+                                startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
+                                finish();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task1.getException());
+                        }
+                    });
+        }
+    }
 
 //    getCustomToken() 실행
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {

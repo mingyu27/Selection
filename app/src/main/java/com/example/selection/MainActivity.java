@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 storeName = o.getData().getStringExtra("storeName");
                 category = o.getData().getStringExtra("category");
             }
-            Log.d("SMG", storeName);
             Bundle bundle = new Bundle();
             bundle.putString("storeName", storeName);
             bundle.putString("category", category);
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             MenuRecommendFragment menuRecommendFragment = new MenuRecommendFragment();
             menuRecommendFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), menuRecommendFragment).commit();
-            Log.d(TAG, "bundle sended to MenuRecommendFragment");
+            Log.d(TAG, "bundle("+storeName +", "  + category + ") sent to MenuRecommendFragment");
         }
     });
     @Override
