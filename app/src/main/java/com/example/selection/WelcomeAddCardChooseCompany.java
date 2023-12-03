@@ -46,7 +46,6 @@ public class WelcomeAddCardChooseCompany extends AppCompatActivity implements Vi
     @Override
     public void onClick(View v) {
         if(v == binding.goNextButton){
-            Log.d("SMG", "YES");
             startActivity(new Intent(WelcomeAddCardChooseCompany.this, WelcomeAddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
              }
         else if(v == binding.shinhanButton){

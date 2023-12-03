@@ -84,7 +84,7 @@ public class WelcomeLogin extends AppCompatActivity {
                                         if (task1.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task1.getResult()) {
                                                 functionUser = document.toObject(FunctionUser.class);
-                                                startActivity(new Intent(WelcomeLogin.this, MainActivity.class).putExtra("functionUser", functionUser));
+                                                startActivity(new Intent(WelcomeLogin.this, WelcomeAddCardChooseCompany.class).putExtra("functionUser", functionUser));
                                             }
                                         } else {
                                             Log.d(TAG, "Error getting documents: ", task1.getException());

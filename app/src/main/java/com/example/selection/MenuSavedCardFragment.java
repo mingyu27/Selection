@@ -2,11 +2,9 @@
 package com.example.selection;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.selection.R;
 
 import java.util.ArrayList;
 
@@ -51,12 +47,11 @@ public class MenuSavedCardFragment extends Fragment {
      * @return A new instance of fragment menu_possess_card.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuSavedCardFragment newInstance(String param1, String param2) {
+    public static MenuSavedCardFragment newInstance(FunctionUser functionUser) {
         MenuSavedCardFragment fragment = new MenuSavedCardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("functionUser",functionUser);
+        fragment.setArguments(bundle);
         return fragment;
     }
     private class MyViewHolder extends RecyclerView.ViewHolder {
@@ -130,7 +125,7 @@ public class MenuSavedCardFragment extends Fragment {
         Log.d("YJH", "onCreateView");
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_menu_possess_card, container, false);
-        View view = inflater.inflate(R.layout.fragment_menu_possess_card, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu_saved_card, container, false);
         items.add(new Item("A",R.drawable.kookmin16));
         items.add(new Item("B",R.drawable.kookmin6));
         items.add(new Item("C",R.drawable.kookmin42));

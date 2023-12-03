@@ -48,7 +48,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
     private ActivityMainLocationChooseDialogBinding binding;
     private List<String> storeNameList;
     private String selectedStoreName;
-    private String searchedStoreName;
+    private String categoryName;
 
 
 
@@ -65,7 +65,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate");
+        Log.d(TAG, "MainLocationChooseDialog onCreate");
 
         super.onCreate(savedInstanceState);
         binding = ActivityMainLocationChooseDialogBinding.inflate(getLayoutInflater());
@@ -101,10 +101,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
         // 초기값("카페")으로 fetchStores 실행
         if (ContextCompat.checkSelfPermission(MainLocationChooseDialog.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fetchStores(urlEncode(categoryList[0]));
-            Log.d("SMG", "GOOD");
-        } else {
-            Log.d("SMG", "BAD");
-        }
+        } else {}
 
 
 
@@ -117,6 +114,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                 if (ContextCompat.checkSelfPermission(MainLocationChooseDialog.this,
                         Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     fetchStores(urlEncode(categoryList[newVal]));
+                    categoryName = categoryList[newVal];
                     Log.d("SMG", "GOOD");
                 } else Log.d("SMG", "BAD");
 
@@ -135,7 +133,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
 
         //직접검색시
         binding.searchLocationButton.setOnClickListener(view -> {
-            Log.d(TAG, "clicked");
+            Log.d(TAG, " MainLocationChooseDialog click to Search Manually");
             fetchStores(urlEncode(binding.searchLocationEditText.getText().toString()));
             binding.categoryLayout.setVisibility(View.INVISIBLE);
 
@@ -148,7 +146,9 @@ public class MainLocationChooseDialog extends AppCompatActivity {
         });
 
         binding.saveLocationToMainActivity.setOnClickListener(view -> {
-            setResult(RESULT_OK, new Intent().putExtra("storeName", selectedStoreName));
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("storeName", selectedStoreName).putExtra("category", categoryName);
+            setResult(RESULT_OK, resultIntent);
             finish();
         });
 
@@ -180,7 +180,7 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                         Location lastLocation = task.getResult();
                         latitude = lastLocation.getLatitude();
                         longitude = lastLocation.getLongitude();
-                        Log.d(TAG, "Latitude: " + latitude + ", Longitude: " + longitude);
+                        Log.d(TAG, "MainLocationChooseDialog curretn Latitude: " + latitude + ", Longitude: " + longitude);
                     } else {
                         Log.e(TAG, "Failed to get location.");
                     }
@@ -211,8 +211,6 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                         if (location != null) {
                             //GOTO execute(카테고리명, 위도, 경도)
                             new FetchStoresTask().execute(category, String.valueOf(latitude), String.valueOf(longitude));
-                            Log.d("SMG", ""+latitude);
-                            Log.d("SMG", ""+longitude);
                         }
                     });
         } else {

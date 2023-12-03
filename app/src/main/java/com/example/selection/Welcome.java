@@ -40,17 +40,17 @@ public class Welcome extends AppCompatActivity {
     private String userName;
     private FunctionUser functionUser;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        currentUser = mAuth.getCurrentUser();
-        if(currentUser != null) {
-            startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("user", currentUser));
-            finish();
-        }
-
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null) {
+//            startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("user", currentUser));
+//            finish();
+//        }
+//
+//    }
 
 //    getCustomToken() 실행
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
@@ -161,7 +161,7 @@ public class Welcome extends AppCompatActivity {
                         functionUser = document.toObject(FunctionUser.class);
                         isUserFoundInFirestore = true;
                     }
-                    startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
+                    startActivity(new Intent(Welcome.this, WelcomeAddCardChooseCompany.class).putExtra("functionUser", functionUser));
                 }
 
 

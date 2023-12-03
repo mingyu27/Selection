@@ -37,12 +37,11 @@ public class MenuLikedCardFragment extends Fragment {
      * @return A new instance of fragment Dips_CardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuLikedCardFragment newInstance(String param1, String param2) {
+    public static MenuLikedCardFragment newInstance(FunctionUser functionUser) {
         MenuLikedCardFragment fragment = new MenuLikedCardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("functionUser",functionUser);
+        fragment.setArguments(bundle);
         return fragment;
     }
 

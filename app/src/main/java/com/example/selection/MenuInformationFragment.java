@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link MenuAddCardChooseCardFragment#newInstance} factory method to
+ * Use the {@link MenuInformationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MenuAddCardChooseCardFragment extends Fragment {
+public class MenuInformationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class MenuAddCardChooseCardFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MenuAddCardChooseCardFragment() {
+    public MenuInformationFragment() {
         // Required empty public constructor
     }
 
@@ -34,15 +34,14 @@ public class MenuAddCardChooseCardFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuAddCardChooseCardFragment.
+     * @return A new instance of fragment MenuInformationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuAddCardChooseCardFragment newInstance(String param1, String param2) {
-        MenuAddCardChooseCardFragment fragment = new MenuAddCardChooseCardFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+    public static MenuInformationFragment newInstance(FunctionUser functionUser) {
+        MenuInformationFragment fragment = new MenuInformationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("functionUser",functionUser);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -59,6 +58,6 @@ public class MenuAddCardChooseCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_add_card_choose_card, container, false);
+        return inflater.inflate(R.layout.fragment_menu_information, container, false);
     }
 }

@@ -18,9 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Selection"
         tools:targetApi="31">
-<!--        <activity-->
-<!--            android:name=".FunctionIOUser"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".MenuRecommendNewCard"
+            android:exported="false" />
+        <activity
+            android:name=".MenuRecommendSavedCard"
+            android:exported="false" />
+        <activity
+            android:name=".MenuSavedCardAddNewCcard"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".FunctionIOUser" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".FunctionIOShinhan"
             android:exported="true">

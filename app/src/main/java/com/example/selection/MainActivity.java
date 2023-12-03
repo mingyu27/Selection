@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,30 +23,45 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FunctionUser functionUser;
     private BottomNavigationView bottomNavigationView;
-    private String storeName;
+    private String storeName = "";
+    private String category = "";
+    private String TAG = "SMG";
+    private static final int REQUEST_CODE = 1;
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult o) {
+            if (o.getResultCode() == RESULT_OK) {
+                storeName = o.getData().getStringExtra("storeName");
+                category = o.getData().getStringExtra("category");
+            }
+            Log.d("SMG", storeName);
+            Bundle bundle = new Bundle();
+            bundle.putString("storeName", storeName);
+            bundle.putString("category", category);
+            bundle.putSerializable("functionUser", functionUser);
+            MenuRecommendFragment menuRecommendFragment = new MenuRecommendFragment();
+            menuRecommendFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), menuRecommendFragment).commit();
+            Log.d(TAG, "bundle sended to MenuRecommendFragment");
+        }
+    });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
         functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
+        Log.d(TAG, functionUser.getName() + "at MainActivity");
         bottomNavigationView = binding.bottomNavigation;
-        transferTo(MenuRecommendCardFragment.newInstance("param1", "param2"));
+        transferTo(MenuRecommendFragment.newInstance(functionUser));
 
-        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult o) {
-                        if (o.getResultCode() == RESULT_OK){
-                            storeName = o.getData().getStringExtra("storeName");
-                        }
 
-                    }
-                });
 
-        launcher.launch((new Intent(this, MainLocationChooseDialog.class)));
+
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -53,36 +69,51 @@ public class MainActivity extends AppCompatActivity {
                 int itemID = item.getItemId();
 
                 if(itemID == R.id.home){
-                    transferTo(MenuRecommendCardFragment.newInstance("param1","param2"));
+                    transferTo(MenuRecommendFragment.newInstance(functionUser));
                     return true;
                 }
                 if(itemID == R.id.my_card){
-                    transferTo(MenuSavedCardFragment.newInstance("param1","param2"));
+                    transferTo(MenuSavedCardFragment.newInstance(functionUser));
                     return true;
                 }
                 if(itemID == R.id.liked_card){
-                    transferTo(MenuLikedCardFragment.newInstance("param1","param2"));
+                    transferTo(MenuLikedCardFragment.newInstance(functionUser));
                     return true;
                 }
-                if(itemID == R.id.add_card){
-                    transferTo(MenuAddCardChooseCompanyFragment.newInstance("param1","param2"));
-                    return true;
-                }
+//                if(itemID == R.id.add_card){
+//                    transferTo(MenuAddCardChooseCompanyFragment.newInstance("param1","param2"));
+//                    return true;
+//                }
                 return false;
             }
         });
 
-        bottomNavigationView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
 
-            }
-        });
+//        });
     }
     private void transferTo(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(binding.fragmentContainer.getId(), fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), fragment).addToBackStack(null).commit();
+    }
+
+    protected String getStoreName(){
+        return storeName;
+    }
+
+    @Override
+    protected void onResume() {
+//        if(!(storeName.equals(""))){
+//            Bundle bundle = new Bundle();
+//            bundle.putString("storeName", storeName);
+//            MenuRecommendFragment menuRecommendFragment = new MenuRecommendFragment();
+//            menuRecommendFragment.setArguments(bundle);
+//            getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), menuRecommendFragment);
+//            Log.d(TAG, "sended");
+//        }
+        super.onResume();
+    }
+
+    protected void startDialog(){
+        launcher.launch(new Intent(MainActivity.this, MainLocationChooseDialog.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
     }
 }

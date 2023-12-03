@@ -12,4 +12,6 @@
     <color name="main_color">#FF9BEBE1</color>
     <color name="toss">#FF3082F6</color>
     <color name="background_color">#FF3082F6</color>
+    <color name="background_color_white">#FFFFFFFF</color>
+    <color name="recommend_card_background">#F5F5F5</color>
 </resources>
