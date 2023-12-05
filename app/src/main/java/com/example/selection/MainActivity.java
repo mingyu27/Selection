@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(itemID == R.id.information){
-                    transferTo(MenuInformationFragment.newInstance("param1","param2"));
+                    transferTo(MenuInformationFragment.newInstance(functionUser));
                     return true;
                 }
                 return false;

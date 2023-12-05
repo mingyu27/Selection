@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ public class MenuLikedCardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FunctionUser functionUser;
+    private String TAG = "SMG";
 
     public MenuLikedCardFragment() {
         // Required empty public constructor
@@ -48,10 +51,12 @@ public class MenuLikedCardFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        try{
+            FunctionUser tempUser;
+            tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
+            if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuLikedCardFragment");}
+
+        }catch (NullPointerException e){}
     }
 
     @Override

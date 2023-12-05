@@ -3,6 +3,7 @@ package com.example.selection;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MenuInformationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MenuInformationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -32,35 +29,30 @@ public class MenuInformationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private FunctionUser functionUser;
+    private String TAG = "SMG";
     public MenuInformationFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MenuSettingInformationFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MenuInformationFragment newInstance(String param1, String param2) {
+
+    public static MenuInformationFragment newInstance(FunctionUser functionUser) {
         MenuInformationFragment fragment = new MenuInformationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("functionUser",functionUser);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        try{
+            FunctionUser tempUser;
+            tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
+            if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuInformationFragment");}
+
+        }catch (NullPointerException e){}
     }
 
     @Override
@@ -72,12 +64,12 @@ public class MenuInformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ImageView imageView = view.findViewById(R.id.Password_change_button);
+        View imageView = view.findViewById(R.id.Password_change_button);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getParentFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        MenuPasswordChangeFragment.newInstance("param1", "param2")).addToBackStack(null).commit();
+                        MenuPasswordChangeFragment.newInstance(functionUser)).addToBackStack(null).commit();
             }
         });
 

@@ -23,7 +23,9 @@ public class MenuSavedCardFragment extends Fragment {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private ArrayList<Item> items = new ArrayList<>();
+    private String TAG = "SMG";
 
+    private FunctionUser functionUser;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -105,8 +107,15 @@ public class MenuSavedCardFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            //매장이름 넣기
+            //FunctionUser넣기
+            try{
+                FunctionUser tempUser;
+                tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
+                if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuSavedCardFragment");}
+
+            }catch (NullPointerException e){}
+
         }
     }
 
