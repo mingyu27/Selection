@@ -1,5 +1,7 @@
 package com.example.selection;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class FunctionLocationSpecificDiscount {
@@ -102,5 +104,11 @@ public class FunctionLocationSpecificDiscount {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

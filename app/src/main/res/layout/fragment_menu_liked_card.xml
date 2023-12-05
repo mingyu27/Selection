@@ -23,4 +23,28 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/like_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="100dp"
+            />
+
+        <Button
+            android:id="@+id/like_edit_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="편집"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:backgroundTint="#99E6EF"/>
+    </LinearLayout>
+
+
+
 </FrameLayout>

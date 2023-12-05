@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/infoFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,17 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         >
-
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="40dp"
-            android:layout_centerVertical="true"
-            android:layout_height="40dp"
-            android:text="Button"
-            android:src="@drawable/baseline_arrow_back_ios_24"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +19,7 @@
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:textSize="50dp"/>
+            android:textSize="40dp"/>
 
     </RelativeLayout>
 
@@ -109,7 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호"
+                android:text="비밀번호변경"
                 android:textSize="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="40dp"
@@ -138,17 +128,38 @@
                 android:text="연동된 소셜 계정"
                 android:textSize="25sp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-                />
+                android:layout_marginLeft="40dp" />
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="#123"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_width="380dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round"
+            android:layout_marginTop="480dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp" />
+            <ImageView
+                android:id="@+id/logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
-                />
-
+                android:src="@drawable/baseline_arrow_forward_ios_24" />
         </RelativeLayout>
     </RelativeLayout>
-</LinearLayout>
+</FrameLayout>

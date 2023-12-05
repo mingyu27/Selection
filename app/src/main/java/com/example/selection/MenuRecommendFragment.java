@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.protobuf.StringValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,6 @@ public class MenuRecommendFragment extends Fragment {
 
     private FragmentMenuRecommendBinding binding;
     private String TAG = "SMG";
-    private ImageView InfoButton;
     private String storeName = "위치를 선택해주세요";
     private String category = "카테고리를 선택해주세요";
     private String camelTypeCategory;
@@ -145,9 +145,21 @@ public class MenuRecommendFragment extends Fragment {
                 savedShinhanCardIndexArrayList = functionUser.getSavedShinhan();
                 savedKookminCardIndexArrayList = functionUser.getSavedKookmin();
 
+                Log.d("SMG1", "보유중인 신한카드");
+                for(Integer integer : savedShinhanCardIndexArrayList){
+                    Log.d("SMG1", integer + " ");
+                }
+
+                Log.d("SMG1", "보유중인 국민카드");
+                for(Integer integer : savedKookminCardIndexArrayList){
+                    Log.d("SMG1", integer + " ");
+                }
+
+
                 //보유중인 Shinhan카드 중,,discountAll, discountPart
                 for(int i = 0; i < savedShinhanCardIndexArrayList.size(); i++){
                     //해당카테고리 모두할인되는 카드 저장
+                    //저장된 신한카드중,,i번째 카드가 해당카테고리 전부할인이면,,i번째 카드정보를,,FunctionCard tempCard에 저장,,상세카드혜택(amuse~theater)도 저장
                     db.collection("Shinhan")
                             .whereEqualTo("cardIndex", savedShinhanCardIndexArrayList.get(i))
                             .whereEqualTo("ifDiscount"+ camelTypeCategory+"All", true)
@@ -159,7 +171,7 @@ public class MenuRecommendFragment extends Fragment {
                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                             FunctionCard tempCard = document.toObject(FunctionCard.class);
 
-                                            //상세카드 할인혜택필드도 완성할것
+                                            //상세카드 할인혜택필드도 완성할것,,이게좀 오래걸리는것같음,,functionLocationSpecificDiscountArrayList을 받아와서,,amuse~theater필드를 완성함
                                             try {
                                                 tempCard.setAmusementDiscount(getFunctionSpecificDiscountArrayList(document, "amusementDiscount"));
                                             } catch (Exception e) {
@@ -202,7 +214,8 @@ public class MenuRecommendFragment extends Fragment {
                                             }
 
                                             discountCategoryAllSavedShinhanCard.add(tempCard);
-                                        Log.d("SMG1", "신한모두할인"+document.toObject(FunctionCard.class).getCardIndex());
+                                            Log.d("SMG1", "신한모두할인되는 "+document.toObject(FunctionCard.class).getCardIndex() + " 저장함");
+
                                         }
                                     } else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
@@ -265,7 +278,7 @@ public class MenuRecommendFragment extends Fragment {
                                             }
 
                                             discountCategoryPartSavedShinhanCard.add(tempCard);
-                                            Log.d("SMG1", "신한일부할인"+document.toObject(FunctionCard.class).getCardIndex());
+                                            Log.d("SMG1", "신한일부할인되는 "+document.toObject(FunctionCard.class).getCardIndex() + " 저장함");
 
 
 
@@ -276,6 +289,11 @@ public class MenuRecommendFragment extends Fragment {
                                 }
                             });
                 }
+
+
+
+
+
 
                 //보유중인 Kookmin카드 중,,discountAll, discountPart
                 for(int i = 0; i < savedKookminCardIndexArrayList.size(); i++) {
@@ -333,7 +351,7 @@ public class MenuRecommendFragment extends Fragment {
                                             }
 
                                             discountCategoryAllSavedKookminCard.add(tempCard);
-                                        Log.d("SMG1", "국민전체할인"+document.toObject(FunctionCard.class).getCardIndex());
+                                        Log.d("SMG1", "국민전체할인되는"+document.toObject(FunctionCard.class).getCardIndex() + " 저장함");
                                         }
                                     } else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
@@ -396,7 +414,7 @@ public class MenuRecommendFragment extends Fragment {
                                             }
 
                                             discountCategoryPartSavedKookminCard.add(tempCard);
-                                        Log.d("SMG1", "국민일부할인"+document.toObject(FunctionCard.class).getCardIndex());
+                                        Log.d("SMG1", "국민일부할인되는"+document.toObject(FunctionCard.class).getCardIndex() + " 저장함");
                                         }
 
 
@@ -408,16 +426,14 @@ public class MenuRecommendFragment extends Fragment {
                                     }
                                 }
                             });
+
                 }
-                //분류된 카드 Log출력해보기
-//                    Log.d("SMG1", "신한모두할인 첫번째 " + discountCategoryAllSavedShinhanCard.get(0).getCardName() +
-//                            " 신한일부할인 첫번째 " + discountCategoryPartSavedShinhanCard.get(0).getCardName() +
-//                            " 국민모두할인 첫번째 " + discountCategoryAllSavedKookminCard.get(0).getCardName() +
-//                            " 국민일부할인 첫번째 " + discountCategoryPartSavedKookminCard.get(0).getCardName());
+
 
                 //최적의 할인수단으로 화면 구성할것
                 binding.recommendNewCardView.setVisibility(View.VISIBLE);
                 binding.recommendSavedCardView.setVisibility(View.VISIBLE);
+
 
 
                 //특수매장에 포함되는경우
@@ -1714,8 +1730,8 @@ public class MenuRecommendFragment extends Fragment {
                 //근데 pay1, pay2는 각각 최대할인액, 최대할인비율로 해야겠다..이런근본적인걸 잊고있었던 나는 죤나병신인가
 
                 //최대할인/캐시백비율, 최대할인/캐시백액 산정하기
-                binding.pay1CardName.setText(bestDiscountAmount);
-//                binding.pay2CardName.setText(bestCashbackAmount);
+                if(bestDiscountAmount != 0) binding.pay1CardName.setText(String.valueOf(bestDiscountAmount));
+                if(bestCashbackAmount != 0) binding.pay2CardName.setText(bestCashbackAmount);
 
 
 
@@ -1782,6 +1798,7 @@ public class MenuRecommendFragment extends Fragment {
         );
     }
 
+    //document, amuse~theater얻어와서,, functionLocationSpecificDiscount-ArrayList return
     private ArrayList<FunctionLocationSpecificDiscount> getFunctionSpecificDiscountArrayList(QueryDocumentSnapshot document, String specificDiscount) throws Exception {
         ArrayList<FunctionLocationSpecificDiscount> functionLocationSpecificDiscountArrayList = new ArrayList<>();
         switch (specificDiscount){
@@ -1839,10 +1856,11 @@ public class MenuRecommendFragment extends Fragment {
         return functionLocationSpecificDiscountArrayList;
     }
 
+    //amuse~theater 컬렉션에서,,"매장이름"의 FunctionLocationSpecificDiscount을 클래스형식으로 받아옴
     private FunctionLocationSpecificDiscount getFunctionSpecificDiscount(QueryDocumentSnapshot queryDocumentSnapshot, String specificDiscount, String locationName) throws Exception {
 
         Task<DocumentSnapshot> task = queryDocumentSnapshot.getReference().collection(specificDiscount).document(locationName).get();
-        while(!task.isComplete()){Thread.sleep(100);}
+        while(!task.isComplete()){Thread.sleep(1);}
 
         // 작업이 성공적으로 완료됐는지 확인
         if (task.isSuccessful()) {

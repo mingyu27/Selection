@@ -17,8 +17,8 @@
         android:icon="@drawable/baseline_favorite_24"
         android:title="찜한 카드" />
     <item
-        android:id="@+id/add_card"
+        android:id="@+id/information"
         android:enabled="true"
-        android:icon="@drawable/baseline_add_card_24"
-        android:title="카드 추가" />
+        android:icon="@drawable/baseline_dehaze_24"
+        android:title="MY" />
 </menu>

@@ -79,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
                     transferTo(MenuLikedCardFragment.newInstance(functionUser));
                     return true;
                 }
-//                if(itemID == R.id.add_card){
-//                    transferTo(MenuAddCardChooseCompanyFragment.newInstance("param1","param2"));
-//                    return true;
-//                }
+
+                if(itemID == R.id.information){
+                    transferTo(MenuSettingInformationFragment.newInstance("param1","param2"));
+                    return true;
+                }
                 return false;
             }
         });
