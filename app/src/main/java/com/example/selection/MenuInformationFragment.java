@@ -73,7 +73,7 @@ public class MenuInformationFragment extends Fragment {
             }
         });
 
-        ImageView logoutButton = view.findViewById(R.id.logout_button);
+        View logoutButton = view.findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

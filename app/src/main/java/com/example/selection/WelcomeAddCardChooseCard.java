@@ -7,8 +7,11 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -41,7 +44,8 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
     private static final String TAG = "SMG";
     private FirebaseFirestore db;
     private LinearLayout linearLayout;
-
+    private EditText cardChooseEditText;
+    private NumberPicker cardSelectList;
 
 
     @SuppressLint("CheckResult")
@@ -51,11 +55,10 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
         binding = ActivityAddCardChooseCardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         linearLayout = binding.linearLayoutForSavedCard;
-
-
-
         db = FirebaseFirestore.getInstance();
         functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
+        cardChooseEditText = findViewById(R.id.Card_Choose_EditText);
+        cardSelectList = findViewById(R.id.card_select_list);
         Log.d(TAG, functionUser.getName() + "at WelcomeAddCardChooseCard");
 
 
@@ -97,13 +100,9 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
             //카드번호저장된 arraylist를 functionUser의 필드에 저장
             if(companyNameToEnroll.equals("신한")){functionUser.setSavedShinhan(savedCardIndexArrayList);}
             else if(companyNameToEnroll.equals("KB국민")){functionUser.setSavedKookmin(savedCardIndexArrayList);}
-
-
             //만약 저장이 다됐다면
             if(companyToEnrollList.isEmpty()){
                 CollectionReference userReference = db.collection("User");
-
-
                 startActivity(new Intent(WelcomeAddCardChooseCard.this, MainActivity.class).putExtra("functionUser", functionUser).putExtra("isJustStarted", true));
                 Toast.makeText(this, "카드가 모두 정상적으로 등록됐습니다.", Toast.LENGTH_SHORT).show();
                 userReference.document((functionUser.getUid().contains("kakao"))?"kakao"+functionUser.getName():"email"+functionUser.getName()).set(functionUser);
@@ -122,7 +121,6 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
             }
             else{
                 savedCardIndexArrayList.add(selectedCardIndex);
-
                 //하단에 카드사진 추가
                 ImageView imageView = new ImageView(this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(300, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -182,24 +180,48 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
 //                        );
 
                 new MyAsyncTask().execute();
+            }
+        });
+        cardChooseEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filterCardList(charSequence.toString());
+            }
 
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
-
-
-
-
-
-
     }
+    private void filterCardList(String filterText) {
+        String[] cardList = cardsToEnroll;
 
+        ArrayList<String> filteredList = new ArrayList<>();
+        for (String card : cardList) {
+            if (card.toLowerCase().contains(filterText.toLowerCase())) {
+                filteredList.add(card);
+            }
+        }
+
+        if (!filteredList.isEmpty()) {
+            cardSelectList.setMinValue(0);
+            cardSelectList.setMaxValue(filteredList.size() - 1);
+            cardSelectList.setDisplayedValues(filteredList.toArray(new String[0]));
+            cardSelectList.setWrapSelectorWheel(false);
+        } else {
+            // If filteredList is empty, reset the NumberPicker
+            cardSelectList.setMinValue(0);
+            cardSelectList.setMaxValue(0);
+            cardSelectList.setDisplayedValues(null);
+        }
+    }
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
-
-
-
         @Override
         protected Void doInBackground(Void... params) {
             // 백그라운드에서 실행할 작업을 수행합니다.
@@ -255,12 +277,7 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                     });
             return null;
         }
-
     }
-
-
-
-
     private ArrayList<FunctionLocationSpecificDiscount> getFunctionSpecificDiscountArrayList(QueryDocumentSnapshot document, String specificDiscount) throws Exception {
         ArrayList<FunctionLocationSpecificDiscount> functionLocationSpecificDiscountArrayList = new ArrayList<>();
         switch (specificDiscount){
@@ -305,10 +322,8 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                 break;
 
         }
-
         return functionLocationSpecificDiscountArrayList;
     }
-
     private FunctionLocationSpecificDiscount getFunctionSpecificDiscount(QueryDocumentSnapshot queryDocumentSnapshot, String specificDiscount, String locationName) throws Exception {
 
         Task<DocumentSnapshot> task = queryDocumentSnapshot.getReference().collection(specificDiscount).document(locationName).get();
@@ -329,19 +344,5 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
             Log.d(TAG, "Error getting document" + locationName);
             throw new Exception("Error getting document", task.getException());
         }
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
 }

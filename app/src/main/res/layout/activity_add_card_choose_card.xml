@@ -55,7 +55,8 @@
             android:id="@+id/Card_Choose_EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:singleLine="true"/>
 
 
     </LinearLayout>
@@ -112,8 +113,7 @@
                 android:id="@+id/selected_card_image"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:src="@drawable/shinhan_logo"/>
+                android:layout_height="100dp"/>
 
             <Button
                 android:id="@+id/save_card"
