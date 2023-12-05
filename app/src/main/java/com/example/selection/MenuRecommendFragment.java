@@ -59,16 +59,9 @@ public class MenuRecommendFragment extends Fragment {
     private String alterFunctionCardCompany; private int alterFunctionCardIndex;
     private double bestDiscountRate = 0.0; private int bestDiscountAmount = 0; private double bestCashbackRate = 0.0; private int bestCashbackAmount = 0;
     private double alterDiscountRate = 0.0; private int alterDiscountAmount = 0; private double alterCashbackRate = 0.0; private int alterCashbackAmount = 0;
-
-
-
-
-
     public MenuRecommendFragment() {
         // Required empty public constructor
     }
-
-
     //MenuRecommendFragment생성할때,, functionUser매겨변수로 받아와서,, 유저포함한 fragment생성해서 return
     public static MenuRecommendFragment newInstance(FunctionUser functionUser) {
         MenuRecommendFragment fragment = new MenuRecommendFragment();
@@ -77,7 +70,6 @@ public class MenuRecommendFragment extends Fragment {
         fragment.setArguments(bundle);
         return fragment;
     }
-
     //activity에 붙을때는 부모 액티비티 주소만 받아올것
     @Override
     public void onAttach(@NonNull Context context) {
@@ -85,7 +77,6 @@ public class MenuRecommendFragment extends Fragment {
         mainActivity = (MainActivity) getActivity();
         db = FirebaseFirestore.getInstance();
     }
-
     //fragemnt 보여지기전에,,안에 들어있는것들 꺼내보기
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,9 +95,7 @@ public class MenuRecommendFragment extends Fragment {
                 FunctionUser tempUser;
                 tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
                 if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuRecommendFragment");}
-
             }catch (NullPointerException e){}
-
             try{
                 String str;
                 str = getArguments().getString("category");
@@ -114,33 +103,23 @@ public class MenuRecommendFragment extends Fragment {
             }catch (NullPointerException e){}
         }
         Log.d(TAG, "MenuRecommendFragment onCreate ended with " + functionUser.getName() + ", " + storeName + ", " + category );
-
-
     }
-
-
     //완성(리스너달아서,, 화면으로 보여지는 것은 이 과정에서 다 처리할것)해서,, 뷰를 보여지게할것
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "MenuRecommendFragment onCreateView");
-
         binding = FragmentMenuRecommendBinding.inflate(inflater, container, false);
         binding.pay1Card.setOnClickListener(view-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("payPriority", 1));});
         binding.pay2Card.setOnClickListener(view-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("payPriority", 2));});
         binding.recommendNewCardView.setOnClickListener(view-> {startActivity(new Intent(getActivity(), MenuRecommendNewCard.class).putExtra("payPriority", 2));});
         binding.selectedLocation.setOnClickListener(view -> {mainActivity.startDialog();});
         binding.selectedLocation.setText(storeName);
-
         //다이얼로그에서 장소 받아오면
         if(isLocationSet) {
-
-
             //해당카테고리 할인 가능한 functionUser
             if(isAvailableDiscountCategory(category)){
                 Log.d(TAG, "MenuRecommendFragment onCreateView " + category + " is AvailableDiscountCategory");
-
-
                 //보유중인 카드 인덱스로 카드 추출;
                 savedShinhanCardIndexArrayList = functionUser.getSavedShinhan();
                 savedKookminCardIndexArrayList = functionUser.getSavedKookmin();
@@ -279,9 +258,6 @@ public class MenuRecommendFragment extends Fragment {
 
                                             discountCategoryPartSavedShinhanCard.add(tempCard);
                                             Log.d("SMG1", "신한일부할인되는 "+document.toObject(FunctionCard.class).getCardIndex() + " 저장함");
-
-
-
                                         }
                                     } else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
@@ -289,12 +265,6 @@ public class MenuRecommendFragment extends Fragment {
                                 }
                             });
                 }
-
-
-
-
-
-
                 //보유중인 Kookmin카드 중,,discountAll, discountPart
                 for(int i = 0; i < savedKookminCardIndexArrayList.size(); i++) {
                     db.collection("Kookmin")
@@ -412,24 +382,15 @@ public class MenuRecommendFragment extends Fragment {
                                             } catch (Exception e) {
                                                 throw new RuntimeException(e);
                                             }
-
                                             discountCategoryPartSavedKookminCard.add(tempCard);
                                         Log.d("SMG1", "국민일부할인되는"+document.toObject(FunctionCard.class).getCardIndex() + " 저장함");
                                         }
-
-
-
-
-
                                     } else {
                                         Log.d(TAG, "Error getting documents: ", task.getException());
                                     }
                                 }
                             });
-
                 }
-
-
                 //최적의 할인수단으로 화면 구성할것
                 binding.recommendNewCardView.setVisibility(View.VISIBLE);
                 binding.recommendSavedCardView.setVisibility(View.VISIBLE);
@@ -1873,19 +1834,7 @@ public class MenuRecommendFragment extends Fragment {
         } else {
             throw new Exception("Error getting document", task.getException());
         }
-
-
-
-
-
-
-
-
-
-
-
     }
-
     private int firebaseTypeSpecialStoreIndex(String storeName){
         switch (storeName){
             case "레고랜드": case "던킨": case "yes24": case "배스킨라빈스": case "CU": case "KFC": case "계절밥상": case "CGV": return 0;
@@ -1905,14 +1854,6 @@ public class MenuRecommendFragment extends Fragment {
             case "투썸플레이스": return 7;
 
             default: return 0;
-
-
-
         }
     }
-
-
-
-
-
 }

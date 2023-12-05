@@ -2,6 +2,7 @@
 package com.example.selection;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,14 +18,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MenuSavedCardFragment extends Fragment {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private ArrayList<Item> items = new ArrayList<>();
+    private List<Integer> savedShinhanCardIndexArrayList = new ArrayList<>();
+    private List<Integer> savedKookminCardIndexArrayList = new ArrayList<>();
     private String TAG = "SMG";
-
     private FunctionUser functionUser;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,11 +37,6 @@ public class MenuSavedCardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    public MenuSavedCardFragment() {
-        // Required empty public constructor
-    }
-
 
     public static MenuSavedCardFragment newInstance(FunctionUser functionUser) {
         MenuSavedCardFragment fragment = new MenuSavedCardFragment();
@@ -88,10 +86,12 @@ public class MenuSavedCardFragment extends Fragment {
     class Item {
         private String text;
         private int img;
+        private int index;
 
-        public Item(String text, int img) {
+        public Item(String text, int img,int index) {
             this.text = text;
             this.img = img;
+            this.index=index;
         }
 
         public String getText() {
@@ -101,6 +101,7 @@ public class MenuSavedCardFragment extends Fragment {
         public int getImg() {
             return img;
         }
+        public int getCardIndex() { return index; }
     }
 
     @Override
@@ -112,8 +113,48 @@ public class MenuSavedCardFragment extends Fragment {
             try{
                 FunctionUser tempUser;
                 tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
-                if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuSavedCardFragment");}
+                if(tempUser != null){
+                    functionUser = tempUser;
+                    //functionUser을 통해 list값 불러오기
+                    savedKookminCardIndexArrayList = functionUser.getSavedKookmin();
+                    savedShinhanCardIndexArrayList = functionUser.getSavedShinhan();
+                    Log.d(TAG, functionUser.getName() + "at MenuSavedCardFragment");}
+                Log.d("YJH", "Saved Shinhan Card Index List:");
+                for (Integer index : savedShinhanCardIndexArrayList) {
+                    // Shinhan Card의 이름 리스트
+                    String[] shinHanCardNameList = getResources().getStringArray(R.array.shinHanCardNameList);
+                    // Shinhan Card의 이미지 리소스 ID 리스트
+                    TypedArray shinHanCardImageList = getResources().obtainTypedArray(R.array.shinHanCardImageList);
 
+                    // index에 해당하는 이름과 이미지의 리소스 ID 가져오기
+                    String cardName = shinHanCardNameList[index];
+                    int cardImageResourceId = shinHanCardImageList.getResourceId(index, -1);
+
+                    // 리소스 사용이 끝났으면 TypedArray 해제
+                    shinHanCardImageList.recycle();
+
+                    // Item 객체 생성 및 리스트에 추가
+                    items.add(new Item(cardName, cardImageResourceId, index));
+                   // Log.d("YJH", String.valueOf(index));
+                }
+                Log.d("YJH", "Saved Kookmin Card Index List:");
+                for (Integer index : savedKookminCardIndexArrayList) {
+                    // Shinhan Card의 이름 리스트
+                    String[] kookMinCardNameList = getResources().getStringArray(R.array.kookMinCardNameList);
+                    // Shinhan Card의 이미지 리소스 ID 리스트
+                    TypedArray kookMinCardImageList = getResources().obtainTypedArray(R.array.kookMinCardImageList);
+
+                    // index에 해당하는 이름과 이미지의 리소스 ID 가져오기
+                    String cardName = kookMinCardNameList[index];
+                    int cardImageResourceId = kookMinCardImageList.getResourceId(index, -1);
+
+                    // 리소스 사용이 끝났으면 TypedArray 해제
+                    kookMinCardImageList.recycle();
+
+                    // Item 객체 생성 및 리스트에 추가
+                    items.add(new Item(cardName, cardImageResourceId, index));
+                  //  Log.d("YJH", String.valueOf(index));
+                }
             }catch (NullPointerException e){}
 
         }
@@ -123,21 +164,14 @@ public class MenuSavedCardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("YJH", "onCreateView");
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_menu_possess_card, container, false);
         View view = inflater.inflate(R.layout.fragment_menu_saved_card, container, false);
-        items.add(new Item("A",R.drawable.kookmin16));
-        items.add(new Item("B",R.drawable.kookmin6));
-        items.add(new Item("C",R.drawable.kookmin42));
-        items.add(new Item("D",R.drawable.shinhancard5));
-        items.add(new Item("E",R.drawable.shinhancard22));
         recyclerView = view.findViewById(R.id.recyclerview); // fragment_menu_possess_card.xml에 정의된 RecyclerView ID를 사용합니다.
         adapter = new MyAdapter(requireContext(), items);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
         return view;
     }
-
 //    @Override
 //    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
 //        super.onViewCreated(view, savedInstanceState);

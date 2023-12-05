@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class MenuInformationFragment extends Fragment {
+public class MenuInformationFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +34,6 @@ public class MenuInformationFragment extends Fragment {
     public MenuInformationFragment() {
         // Required empty public constructor
     }
-
 
     public static MenuInformationFragment newInstance(FunctionUser functionUser) {
         MenuInformationFragment fragment = new MenuInformationFragment();
