@@ -83,7 +83,7 @@ public class MenuPasswordChangeFragment extends Fragment {
             public void onClick(View v) {
                 getParentFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container,
-                                MenuSettingInformationFragment.newInstance("param1", "param2"))
+                                MenuInformationFragment.newInstance("param1", "param2"))
                         .commit();
             }
         });

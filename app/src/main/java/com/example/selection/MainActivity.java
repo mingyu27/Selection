@@ -5,10 +5,8 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(itemID == R.id.information){
-                    transferTo(MenuSettingInformationFragment.newInstance("param1","param2"));
+                    transferTo(MenuInformationFragment.newInstance("param1","param2"));
                     return true;
                 }
                 return false;
