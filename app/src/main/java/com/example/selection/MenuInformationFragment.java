@@ -70,13 +70,10 @@ public class MenuInformationFragment extends Fragment {
 
         // userName과 userId 정보 가져오기
         String user_Name = functionUser.getName();
-        String user_Id = functionUser.getUid();
 
         TextView userNameTextView = view.findViewById(R.id.user_name);
-        TextView userIdTextView = view.findViewById(R.id.user_id);
 
         userNameTextView.setText(user_Name);
-        userIdTextView.setText(user_Id);
 
         //카드 갯수 표시
         TextView cardCountTextView = view.findViewById(R.id.Card_Count);
