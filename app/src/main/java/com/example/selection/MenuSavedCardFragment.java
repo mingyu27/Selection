@@ -2,10 +2,12 @@
 package com.example.selection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +40,7 @@ public class MenuSavedCardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Button button;
 
     public static MenuSavedCardFragment newInstance(FunctionUser functionUser) {
         MenuSavedCardFragment fragment = new MenuSavedCardFragment();
@@ -172,11 +176,16 @@ public class MenuSavedCardFragment extends Fragment {
 
         return view;
     }
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-//        super.onViewCreated(view, savedInstanceState);
-//        Intent intent = new Intent(getActivity(),MenuPossessCard.class);
-//        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//        startActivity(intent);
-//    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        button = view.findViewById(R.id.edit_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireContext(), WelcomeAddCardChooseCompany.class).putExtra("functionUser", functionUser));
+            }
+        });
+    }
 }

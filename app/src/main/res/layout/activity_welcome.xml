@@ -55,26 +55,30 @@
 
             <TextView
                 android:id="@+id/login_with_local"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3.3"
+                android:layout_weight="3"
+                android:layout_marginTop="3dp"
                 android:text="로그인"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:gravity="center_vertical"
+                android:gravity="center"
+                android:background="@drawable/round_button"
                 android:visibility="visible"/>
 
             <TextView
                 android:id="@+id/join_with_local"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3.3"
+                android:layout_marginTop="3dp"
+                android:layout_weight="3"
                 android:text="회원가입"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:gravity="center_vertical"
+                android:gravity="center"
+                android:background="@drawable/round_button"
                 android:visibility="visible"/>
 
             <ImageView

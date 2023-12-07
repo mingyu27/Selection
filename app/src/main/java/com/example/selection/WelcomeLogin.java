@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WelcomeLogin extends AppCompatActivity {
     private ActivityWelcomeLoginBinding binding;
     private String userId , userPassword;
@@ -92,8 +95,6 @@ public class WelcomeLogin extends AppCompatActivity {
                                     });
 
                         } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Log.d(TAG, "signInWithEmail:failure");
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

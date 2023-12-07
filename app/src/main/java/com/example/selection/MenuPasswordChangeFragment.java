@@ -26,8 +26,6 @@ public class MenuPasswordChangeFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-
     private String mParam1;
     private String mParam2;
     private FunctionUser functionUser;
@@ -36,10 +34,6 @@ public class MenuPasswordChangeFragment extends Fragment {
     public MenuPasswordChangeFragment() {
         // Required empty public constructor
     }
-
-
-
-
     public static MenuPasswordChangeFragment newInstance(FunctionUser functionUser) {
         MenuPasswordChangeFragment fragment = new MenuPasswordChangeFragment();
         Bundle bundle = new Bundle();
@@ -55,9 +49,7 @@ public class MenuPasswordChangeFragment extends Fragment {
             FunctionUser tempUser;
             tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
             if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuPasswordChangeFragment");}
-
         }catch (NullPointerException e){}
-
     }
 
     @Override
@@ -101,7 +93,6 @@ public class MenuPasswordChangeFragment extends Fragment {
                     passwordMismatch.setVisibility(View.VISIBLE);
                     return;
                 }
-
                 // 현재 로그인한 사용자 가져오기
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

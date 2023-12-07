@@ -27,10 +27,8 @@ public class WelcomeAddCardChooseCompany extends AppCompatActivity implements Vi
         binding = ActivityAddCardChooseCompanyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
-
         binding.shinhanButton.setOnClickListener(this);
         binding.kookminButton.setOnClickListener(this);
-
         binding.goNextButton.setOnClickListener(this);
         binding.hyundaiButton.setOnClickListener(this);
         binding.nonghyupButton.setOnClickListener(this);
@@ -39,10 +37,7 @@ public class WelcomeAddCardChooseCompany extends AppCompatActivity implements Vi
         binding.wooriButton.setOnClickListener(this);
         binding.bcButton.setOnClickListener(this);
         binding.samsungButton.setOnClickListener(this);
-
-
     }
-
     @Override
     public void onClick(View v) {
         if(v == binding.goNextButton){
