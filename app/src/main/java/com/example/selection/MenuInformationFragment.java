@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 
 public class MenuInformationFragment extends Fragment {
@@ -28,7 +32,6 @@ public class MenuInformationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     private FunctionUser functionUser;
     private String TAG = "SMG";
     public MenuInformationFragment() {
@@ -64,6 +67,26 @@ public class MenuInformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // userName과 userId 정보 가져오기
+        String user_Name = functionUser.getName();
+        String user_Id = functionUser.getUid();
+
+        TextView userNameTextView = view.findViewById(R.id.user_name);
+        TextView userIdTextView = view.findViewById(R.id.user_id);
+
+        userNameTextView.setText(user_Name);
+        userIdTextView.setText(user_Id);
+
+        //카드 갯수 표시
+        TextView cardCountTextView = view.findViewById(R.id.Card_Count);
+        ArrayList<Integer> savedKookmin = functionUser.getSavedKookmin();
+        ArrayList<Integer> savedShinhan = functionUser.getSavedShinhan();
+
+        int totalCardCount = savedKookmin.size() + savedShinhan.size();
+
+        cardCountTextView.setText(String.valueOf(totalCardCount));
+
         View imageView = view.findViewById(R.id.Password_change_button);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

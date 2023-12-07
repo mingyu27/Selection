@@ -3,9 +3,28 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="MainActivity">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\kbn37\.android\avd\Pixel_3_API_30.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-12-07T01:40:50.750265500Z" />
+        </State>
+      </entry>
+      <entry key="MenuRecommendNewCard">
         <State />
       </entry>
-      <entry key="Welcome">
+      <entry key="MenuRecommendSavedCard">
+        <State />
+      </entry>
+      <entry key="app">
         <State />
       </entry>
     </value>

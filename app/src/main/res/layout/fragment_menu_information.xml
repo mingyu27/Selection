@@ -1,167 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/infoFrag"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="30dp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="정보"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="40dp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_marginTop="60dp"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/infoFrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="홍길동님!"
-            android:textStyle="bold"
-            android:textSize="50sp"
-            android:layout_centerHorizontal="true"/>
+        android:orientation="vertical"
+        android:padding="30dp">
         <RelativeLayout
-            android:background="@drawable/round"
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="보유중인 카드"
-                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:text="정보"
+                android:textStyle="bold"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-                />
-            <TextView
-                android:id="@+id/Card_Count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4장"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="40dp"
-                />
-        </RelativeLayout>
+                android:layout_centerHorizontal="true"
+                android:textSize="40dp"/>
 
-
-
-        <RelativeLayout
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:background="@drawable/round"
-            android:layout_marginTop="190dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="아이디"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="honggildong"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="40dp"
-                />
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/Password_change_button"
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:background="@drawable/round"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="비밀번호변경"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-                />
-            <ImageView
+                android:text="홍길동님!"
+                android:textStyle="bold"
+                android:textSize="50sp"
+                android:layout_centerHorizontal="true"/>
+            <RelativeLayout
+                android:background="@drawable/round"
+                android:layout_centerHorizontal="true"
+                android:layout_width="380dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="100dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="보유중인 카드"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    />
+                <TextView
+                    android:id="@+id/Card_Count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4장"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="40dp"
+                    />
+            </RelativeLayout>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                />
+
+
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:layout_width="380dp"
+                android:layout_height="80dp"
+                android:background="@drawable/round"
+                android:layout_marginTop="190dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아이디"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    />
+                <TextView
+                    android:id="@+id/user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="honggildong"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="40dp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/Password_change_button"
+                android:layout_centerHorizontal="true"
+                android:layout_width="380dp"
+                android:layout_height="80dp"
+                android:background="@drawable/round"
+                android:layout_marginTop="280dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호변경"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:layout_width="380dp"
+                android:layout_height="80dp"
+                android:background="@drawable/round"
+                android:layout_marginTop="370dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="연동된 소셜 계정"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp" />
+                <ImageView
+                    android:id="@+id/account_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="#123"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/logout_button"
+                android:layout_centerHorizontal="true"
+                android:layout_width="380dp"
+                android:layout_height="80dp"
+                android:background="@drawable/round"
+                android:layout_marginTop="460dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃"
+                    android:textSize="25sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/baseline_arrow_forward_ios_24" />
+            </RelativeLayout>
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:background="@drawable/round"
-            android:layout_marginTop="370dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="연동된 소셜 계정"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp" />
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="#123"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/logout_button"
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:background="@drawable/round"
-            android:layout_marginTop="460dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="로그아웃"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/baseline_arrow_forward_ios_24" />
-        </RelativeLayout>
-    </RelativeLayout>
-</FrameLayout>
+    </FrameLayout>
