@@ -40,28 +40,28 @@ public class Welcome extends AppCompatActivity {
     private String userName;
     private FunctionUser functionUser;
 
-    public void onStart() {
-        super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-        if(currentUser != null) {
-            db.collection("User")
-                    .whereEqualTo("uid", currentUser.getUid())
-                    .get()
-                    .addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task1.getResult()) {
-                                functionUser = document.toObject(FunctionUser.class);
-                                startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
-                                finish();
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task1.getException());
-                        }
-                    });
-        }
-    }
+//    public void onStart() {
+//        super.onStart();
+//        mAuth = FirebaseAuth.getInstance();
+//        currentUser = mAuth.getCurrentUser();
+//        db = FirebaseFirestore.getInstance();
+//        if(currentUser != null) {
+//            db.collection("User")
+//                    .whereEqualTo("uid", currentUser.getUid())
+//                    .get()
+//                    .addOnCompleteListener(task1 -> {
+//                        if (task1.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task1.getResult()) {
+//                                functionUser = document.toObject(FunctionUser.class);
+//                                startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
+//                                finish();
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task1.getException());
+//                        }
+//                    });
+//        }
+//    }
 
 //    getCustomToken() 실행
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {

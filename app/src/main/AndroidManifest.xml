@@ -24,7 +24,6 @@
         <activity
             android:name=".MenuRecommendSavedCard"
             android:exported="false" />
-
         <activity
             android:name=".FunctionIOShinhan"
             android:exported="false">

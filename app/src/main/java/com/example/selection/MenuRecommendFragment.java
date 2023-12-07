@@ -134,7 +134,6 @@ public class MenuRecommendFragment extends Fragment {
                     Log.d("SMG1", integer + " ");
                 }
 
-
                 //보유중인 Shinhan카드 중,,discountAll, discountPart
                 for(int i = 0; i < savedShinhanCardIndexArrayList.size(); i++){
                     //해당카테고리 모두할인되는 카드 저장

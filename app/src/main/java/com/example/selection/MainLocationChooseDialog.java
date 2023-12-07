@@ -39,30 +39,17 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MainLocationChooseDialog extends AppCompatActivity {
-
-
     private NumberPicker categoryPicker;
     private NumberPicker storePicker;
-
     private FusedLocationProviderClient fusedLocationClient;
     private ActivityMainLocationChooseDialogBinding binding;
     private List<String> storeNameList;
     private String selectedStoreName;
     private String selectedCategoryName;
-
-
-
     private static final String REST_API_KEY = "8a4f1750a33a01a17d50933a8336b64a";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private final String TAG = "SMG";
     private double latitude, longitude;
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "MainLocationChooseDialog onCreate");
@@ -298,9 +285,6 @@ public class MainLocationChooseDialog extends AppCompatActivity {
                 FunctionStore store = new FunctionStore(storeName);
                 storeList.add(store);
             }
-
-
-
             // storeList에 매장명만 추가
             for (FunctionStore store : storeList) {
                 storeNameList.add(store.getName());
@@ -308,17 +292,8 @@ public class MainLocationChooseDialog extends AppCompatActivity {
             selectedStoreName = storeNameList.get(0);
             storePicker.setValue(0);
             storePicker.setDisplayedValues(storeNameList.toArray(new String[0]));
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
 }

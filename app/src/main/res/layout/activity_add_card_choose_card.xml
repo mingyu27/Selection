@@ -110,12 +110,15 @@
                 android:layout_height="100dp"
                 android:src="@drawable/shinhan_logo"/>
 
-            <Button
+            <TextView
                 android:id="@+id/save_card"
+                android:layout_margin="15dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:gravity="center"
                 android:text="카드담기"
+                android:background="@drawable/round_button"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
         </LinearLayout>

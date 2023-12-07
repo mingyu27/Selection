@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,24 +18,21 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MenuInformationFragment extends Fragment{
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    public TextView CardCountView;
     private FunctionUser functionUser;
     private String TAG = "SMG";
+    private List<Integer> savedShinhanCardIndexArrayList = new ArrayList<>();
+    private List<Integer> savedKookminCardIndexArrayList = new ArrayList<>();
     public MenuInformationFragment() {
         // Required empty public constructor
     }
-
     public static MenuInformationFragment newInstance(FunctionUser functionUser) {
         MenuInformationFragment fragment = new MenuInformationFragment();
         Bundle bundle = new Bundle();
@@ -42,14 +40,20 @@ public class MenuInformationFragment extends Fragment{
         fragment.setArguments(bundle);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
             FunctionUser tempUser;
             tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
-            if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuInformationFragment");}
+            if(tempUser != null){
+                functionUser = tempUser;
+
+                savedKookminCardIndexArrayList = functionUser.getSavedKookmin();
+                savedShinhanCardIndexArrayList = functionUser.getSavedShinhan();
+
+                Log.d(TAG, functionUser.getName() + "at MenuInformationFragment");
+            }
 
         }catch (NullPointerException e){}
     }
@@ -57,13 +61,27 @@ public class MenuInformationFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_information, container, false);
-    }
+        View rootView = inflater.inflate(R.layout.fragment_menu_information, container, false);
+        CardCountView = rootView.findViewById(R.id.Card_Count);
 
+        // savedKookminCardIndexArrayList와 savedShinhanCardIndexArrayList의 크기 합 구하기
+        int totalCardCount = savedKookminCardIndexArrayList.size() + savedShinhanCardIndexArrayList.size();
+
+        // CardCountView에 값을 설정
+        updateCardCount(totalCardCount);
+
+        return rootView;
+    }
+    public void updateCardCount(int totalCardCount) {
+        if (CardCountView != null) {
+            CardCountView.setText(String.valueOf(totalCardCount));
+        }
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         View imageView = view.findViewById(R.id.Password_change_button);
+        CardCountView = view.findViewById(R.id.Card_Count);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

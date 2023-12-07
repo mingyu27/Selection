@@ -11,7 +11,7 @@
     <color name="transparent">#00000000</color>
     <color name="main_color">#FF9BEBE1</color>
     <color name="toss">#FF3082F6</color>
-    <color name="background_color">#FF3082F6</color>
+    <color name="background_color">#E4E4E4</color>
     <color name="background_color_white">#FFFFFFFF</color>
     <color name="recommend_card_background">#F5F5F5</color>
     <color name="pressed_color">#FF9BeBe1</color>

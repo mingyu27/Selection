@@ -3,6 +3,8 @@ package com.example.selection;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -72,7 +74,6 @@ public class WelcomeJoin extends AppCompatActivity {
             }
         });
     }
-
     //신규가입,,이름,uid로 FunctionUser초기화해서,,firestore에 저장,, putExtra로 MainActivity로 넘김
     private void signUp(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -112,22 +113,43 @@ public class WelcomeJoin extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
-
+    private void onSignUpFailure() {
+        // 다이얼로그를 띄워 사용자에게 알립니다.
+        new AlertDialog.Builder(this)
+                .setTitle("회원가입 실패")
+                .setMessage("회원가입에 실패했습니다. 다시 시도해주세요.")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 확인을 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
 
     // 사용자 생성 성공 시 호출되는 함수
     private void onSignUpSuccess(FunctionUser functionUser) {
         // 외부에서 functionUser 사용 가능
-        Log.d(TAG, "User created successfully: " + functionUser.getName());
-        startActivity(new Intent(this, WelcomeAddCardAlert.class).putExtra("functionUser", functionUser));
+      //  Log.d(TAG, "User created successfully: " + functionUser.getName());
+        new AlertDialog.Builder(this)
+                .setTitle("회원가입 성공")
+                .setMessage("회원가입이 성공했습니다. 환영합니다!")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 확인을 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
+                        dialog.dismiss();
+                        startActivity(new Intent(WelcomeJoin.this, WelcomeAddCardAlert.class).putExtra("functionUser", functionUser));
+                    }
+                })
+                .show();
     }
-
     // 사용자 생성 실패 시 호출되는 함수
-    private void onSignUpFailure() {
-        Log.d(TAG, "User creation failed");
-    }
+ //   private void onSignUpFailure() {
+ //       Log.d(TAG, "User creation failed");
+  //  }
 //    private void updateUI(FirebaseUser user) {
 //        if (user != null) {
 //            Intent intent = new Intent(this, Welcome.class);

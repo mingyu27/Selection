@@ -1,8 +1,10 @@
 package com.example.selection;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,17 +98,25 @@ public class WelcomeLogin extends AppCompatActivity {
 
                         } else {
                             Log.d(TAG, "signInWithEmail:failure");
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+                            showLoginFailureDialog();
+
                         }
                     }
                 });
     }
-//    private void updateUI(FirebaseUser user) {
-//        if (user != null) {
-//            Intent intent = new Intent(this, Welcome.class);
-//            //intent.putExtra("USER_PROFILE", "email: " + user.getEmail() + "\n" + "uid: " + user.getUid());
-//            startActivity(intent);
-//        }
-//    }
+private void showLoginFailureDialog() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("로그인 실패")
+            .setMessage("아이디 또는 비밀번호가 올바르지 않습니다.")
+            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // 사용자가 확인을 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
+                    dialog.dismiss();
+                }
+            })
+            .show();
+}
 }
