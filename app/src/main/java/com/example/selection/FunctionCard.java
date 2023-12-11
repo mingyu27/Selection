@@ -1,8 +1,9 @@
 package com.example.selection;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FunctionCard {
+public class FunctionCard implements Serializable {
     private int cardIndex;
     private String cardName;
     private String cardApplicationLink;

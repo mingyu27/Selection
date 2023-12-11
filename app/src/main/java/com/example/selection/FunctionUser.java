@@ -5,6 +5,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class FunctionUser implements Serializable {
     private String uid;
@@ -17,15 +18,23 @@ public class FunctionUser implements Serializable {
     private boolean availableDiscountFastFood;
     private boolean availableDiscountRestaurant;
     private boolean availableDiscountTheater;
-    private ArrayList<Integer> likedKookmin;
-    private ArrayList<Integer> likedShinhan;
-    private ArrayList<Integer> savedKookmin;
-    private ArrayList<Integer> savedShinhan;
+    private List<Integer> likedKookminIndexList;
+    private List<Integer> likedShinhanIndexList;
+    private List<Integer> savedKookminIndexList;
+    private List<Integer> savedShinhanIndexList;
 
+    private List<FunctionCard> savedKookminFunctionCardList = new ArrayList<>();
+    private List<FunctionCard> savedShinhanFunctionCardList = new ArrayList<>();
     public FunctionUser(){}
 
 
-    public FunctionUser(String uid, String name, boolean availableDiscountAmusement, boolean availableDiscountBakery, boolean availableDiscountBookStore, boolean availableDiscountCafe, boolean availableDiscountConvenientStore, boolean availableDiscountFastFood, boolean availableDiscountRestaurant, boolean availableDiscountTheater, ArrayList<Integer> likedKookmin, ArrayList<Integer> likedShinhan, ArrayList<Integer> savedKookmin, ArrayList<Integer> savedShinhan) {
+    public FunctionUser(String uid, String name,
+                        boolean availableDiscountAmusement, boolean availableDiscountBakery,
+                        boolean availableDiscountBookStore, boolean availableDiscountCafe,
+                        boolean availableDiscountConvenientStore, boolean availableDiscountFastFood,
+                        boolean availableDiscountRestaurant, boolean availableDiscountTheater,
+                        List<Integer> likedKookminIndexList, List<Integer> likedShinhanIndexList,
+                        List<Integer> savedKookminIndexList, List<Integer> savedShinhanIndexList) {
         this.uid = uid;
         this.name = name;
         this.availableDiscountAmusement = availableDiscountAmusement;
@@ -36,12 +45,11 @@ public class FunctionUser implements Serializable {
         this.availableDiscountFastFood = availableDiscountFastFood;
         this.availableDiscountRestaurant = availableDiscountRestaurant;
         this.availableDiscountTheater = availableDiscountTheater;
-        this.likedKookmin = likedKookmin;
-        this.likedShinhan = likedShinhan;
-        this.savedKookmin = savedKookmin;
-        this.savedShinhan = savedShinhan;
+        this.likedKookminIndexList = likedKookminIndexList;
+        this.likedShinhanIndexList = likedShinhanIndexList;
+        this.savedKookminIndexList = savedKookminIndexList;
+        this.savedShinhanIndexList = savedShinhanIndexList;
     }
-
 
     public String getUid() {
         return uid;
@@ -123,35 +131,51 @@ public class FunctionUser implements Serializable {
         this.availableDiscountTheater = availableDiscountTheater;
     }
 
-    public ArrayList<Integer> getLikedKookmin() {
-        return likedKookmin;
+    public List<Integer> getLikedKookminIndexList() {
+        return likedKookminIndexList;
     }
 
-    public void setLikedKookmin(ArrayList<Integer> likedKookmin) {
-        this.likedKookmin = likedKookmin;
+    public void setLikedKookminIndexList(List<Integer> likedKookminIndexList) {
+        this.likedKookminIndexList = likedKookminIndexList;
     }
 
-    public ArrayList<Integer> getLikedShinhan() {
-        return likedShinhan;
+    public List<Integer> getLikedShinhanIndexList() {
+        return likedShinhanIndexList;
     }
 
-    public void setLikedShinhan(ArrayList<Integer> likedShinhan) {
-        this.likedShinhan = likedShinhan;
+    public void setLikedShinhanIndexList(List<Integer> likedShinhanIndexList) {
+        this.likedShinhanIndexList = likedShinhanIndexList;
     }
 
-    public ArrayList<Integer> getSavedKookmin() {
-        return savedKookmin;
+    public List<Integer> getSavedKookminIndexList() {
+        return savedKookminIndexList;
     }
 
-    public void setSavedKookmin(ArrayList<Integer> savedKookmin) {
-        this.savedKookmin = savedKookmin;
+    public void setSavedKookminIndexList(List<Integer> savedKookminIndexList) {
+        this.savedKookminIndexList = savedKookminIndexList;
     }
 
-    public ArrayList<Integer> getSavedShinhan() {
-        return savedShinhan;
+    public List<Integer> getSavedShinhanIndexList() {
+        return savedShinhanIndexList;
     }
 
-    public void setSavedShinhan(ArrayList<Integer> savedShinhan) {
-        this.savedShinhan = savedShinhan;
+    public void setSavedShinhanIndexList(List<Integer> savedShinhanIndexList) {
+        this.savedShinhanIndexList = savedShinhanIndexList;
+    }
+
+    public List<FunctionCard> getSavedKookminFunctionCardList() {
+        return savedKookminFunctionCardList;
+    }
+
+    public void setSavedKookminFunctionCardList(List<FunctionCard> savedKookminFunctionCardList) {
+        this.savedKookminFunctionCardList = savedKookminFunctionCardList;
+    }
+
+    public List<FunctionCard> getSavedShinhanFunctionCardList() {
+        return savedShinhanFunctionCardList;
+    }
+
+    public void setSavedShinhanFunctionCardList(List<FunctionCard> savedShinhanFunctionCardList) {
+        this.savedShinhanFunctionCardList = savedShinhanFunctionCardList;
     }
 }

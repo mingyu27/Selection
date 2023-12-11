@@ -76,8 +76,8 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
         }
 
         //현재 등록예정인 리스트에..functionUser의 기존 리스트를 불러오기..카드사별로
-        if(companyNameToEnroll.equals("신한")){savedCardIndexArrayList = functionUser.getSavedShinhan(); savedCardIndexArrayList = new ArrayList<>(new HashSet<>(savedCardIndexArrayList));}
-        else if(companyNameToEnroll.equals("KB국민")){savedCardIndexArrayList = functionUser.getSavedKookmin(); savedCardIndexArrayList = new ArrayList<>(new HashSet<>(savedCardIndexArrayList));}
+        if(companyNameToEnroll.equals("신한")){savedCardIndexArrayList = (ArrayList<Integer>) functionUser.getSavedShinhanIndexList(); savedCardIndexArrayList = new ArrayList<>(new HashSet<>(savedCardIndexArrayList));}
+        else if(companyNameToEnroll.equals("KB국민")){savedCardIndexArrayList = (ArrayList<Integer>) functionUser.getSavedKookminIndexList(); savedCardIndexArrayList = new ArrayList<>(new HashSet<>(savedCardIndexArrayList));}
 
 
         NumberPicker pickCard = binding.cardSelectList;
@@ -98,8 +98,8 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
 
         binding.goNextButton.setOnClickListener(view -> {
             //카드번호저장된 arraylist를 functionUser의 필드에 저장
-            if(companyNameToEnroll.equals("신한")){functionUser.setSavedShinhan(savedCardIndexArrayList);}
-            else if(companyNameToEnroll.equals("KB국민")){functionUser.setSavedKookmin(savedCardIndexArrayList);}
+            if(companyNameToEnroll.equals("신한")){functionUser.setSavedShinhanIndexList(savedCardIndexArrayList); }
+            else if(companyNameToEnroll.equals("KB국민")){functionUser.setSavedKookminIndexList(savedCardIndexArrayList);}
             //만약 저장이 다됐다면
             if(companyToEnrollList.isEmpty()){
                 CollectionReference userReference = db.collection("User");
@@ -232,7 +232,6 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 FunctionCard functionCard = document.toObject(FunctionCard.class);
-                                Log.d(TAG, "추가된카드 = " + functionCard.getCardName());
                                 try {
                                     functionCard.setAmusementDiscount(getFunctionSpecificDiscountArrayList(document, "amusementDiscount"));
                                     functionCard.setBakeryDiscount(getFunctionSpecificDiscountArrayList(document, "bakeryDiscount"));
@@ -244,6 +243,14 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                                     functionCard.setTheaterDiscount(getFunctionSpecificDiscountArrayList(document, "theaterDiscount"));
                                 } catch (Exception e) {
                                     throw new RuntimeException(e);
+                                }
+
+                                if(companyNameToEnroll.equals("신한")) {
+                                    functionUser.getSavedShinhanFunctionCardList().add(functionCard);
+//                                    Log.d(TAG, "functionuser에 추가된카드 = " + functionUser.getSavedShinhanFunctionCardList().get(0).getCardName());
+                                }
+                                else{ functionUser.getSavedKookminFunctionCardList().add(functionCard);
+//                                    Log.d(TAG, "functionuser에 추가된카드 = " + functionUser.getSavedKookminFunctionCardList().get(0).getCardName());
                                 }
 
                                 if (functionCard.isIfDiscountAmusement()) {

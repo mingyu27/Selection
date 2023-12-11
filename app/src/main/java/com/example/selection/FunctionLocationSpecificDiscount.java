@@ -2,9 +2,10 @@ package com.example.selection;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class FunctionLocationSpecificDiscount {
+public class FunctionLocationSpecificDiscount implements Serializable {
     private int discountAmount;
     private double discountRate;
     private int cashbackAmount;

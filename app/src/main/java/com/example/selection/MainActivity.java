@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             MenuRecommendFragment menuRecommendFragment = new MenuRecommendFragment();
             menuRecommendFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), menuRecommendFragment).commit();
-            Log.d(TAG, "bundle("+storeName +", "  + category + ") sent to MenuRecommendFragment");
+            Log.d(TAG, "bundle("+storeName +", "  + category + ") sent to MenuRecommendFragment1");
         }
     });
     @Override
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
+        Log.d(TAG, "functionuser에  있는카드 = " + functionUser.getSavedKookminFunctionCardList().get(0).getCardName());
         Log.d(TAG, functionUser.getName() + "at MainActivity");
         bottomNavigationView = binding.bottomNavigation;
         transferTo(MenuRecommendFragment.newInstance(functionUser));

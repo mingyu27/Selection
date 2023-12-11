@@ -26,10 +26,6 @@
             android:exported="false" />
 
         <activity
-            android:name=".FunctionIOShinhan"
-            android:exported="false">
-        </activity>
-        <activity
             android:name=".Welcome"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
@@ -42,12 +38,7 @@
         <activity
             android:name=".WelcomeAddCardAlert"
             android:exported="false" />
-        <activity
-            android:name=".SettingsPwChange"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsInformation"
-            android:exported="false" />
+
         <activity
             android:name=".WelcomeLogin"
             android:exported="false" />

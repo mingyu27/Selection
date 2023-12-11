@@ -93,9 +93,8 @@ public class WelcomeJoin extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             functionUser = new FunctionUser(
                                     user.getUid(), userName, false, false, false, false,
-                                    false, false, false, false,
-                                    new ArrayList<Integer>(), new ArrayList<Integer>(),
-                                    new ArrayList<Integer>(), new ArrayList<Integer>());
+                                    false, false, false, false, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()
+                                    );
                             CollectionReference userReference = db.collection("User");
                             userReference.document("email"+userName).set(functionUser);
 
