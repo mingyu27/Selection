@@ -1,14 +1,16 @@
 package com.example.selection;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.selection.databinding.ActivityWelcomeLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -92,20 +94,52 @@ public class WelcomeLogin extends AppCompatActivity {
                                     });
 
                         } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Log.d(TAG, "signInWithEmail:failure");
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+                            showLoginFailureDialog();
+
                         }
                     }
                 });
     }
-//    private void updateUI(FirebaseUser user) {
-//        if (user != null) {
-//            Intent intent = new Intent(this, Welcome.class);
-//            //intent.putExtra("USER_PROFILE", "email: " + user.getEmail() + "\n" + "uid: " + user.getUid());
-//            startActivity(intent);
-//        }
-//    }
+    private void showLoginFailureDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // 긍정적인(확인) 버튼 설정
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 사용자가 확인을 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
+                dialog.dismiss();
+            }
+        });
+
+        // 부정적인(취소) 버튼 설정
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 사용자가 취소를 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
+                dialog.dismiss();
+            }
+        });
+
+        // 다이얼로그 제목 및 메시지 설정
+        builder.setTitle("로그인 실패")
+                .setMessage("아이디 또는 비밀번호가 올바르지 않습니다.");
+
+        // 긍정적인(확인) 버튼의 글자색 설정
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                // 버튼의 글자색을 변경합니다.
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.black));
+            }
+        });
+
+        // 다이얼로그 표시
+        alertDialog.show();
+    }
+
 }
