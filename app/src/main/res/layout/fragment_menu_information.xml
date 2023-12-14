@@ -9,8 +9,7 @@
     android:padding="30dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
+        android:layout_height="50dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,28 +19,45 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="40dp"/>
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_marginTop="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="홍길동님!"
-            android:textStyle="bold"
-            android:textSize="50sp"
-            android:layout_centerHorizontal="true"/>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:layout_width="380dp"
+            android:layout_height="80dp"
+            android:background="@drawable/round"
+            android:layout_marginTop="100dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                />
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홍길동님"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"/>
+        </RelativeLayout>
+
         <RelativeLayout
             android:background="@drawable/round"
             android:layout_centerHorizontal="true"
             android:layout_width="380dp"
             android:layout_height="80dp"
-            android:layout_marginTop="100dp"
-            >
+            android:layout_marginTop="190dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,34 +71,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4장"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="40dp"
-                />
-        </RelativeLayout>
-
-
-
-        <RelativeLayout
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:background="@drawable/round"
-            android:layout_marginTop="190dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="아이디"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="honggildong"
                 android:textSize="25sp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -107,7 +95,6 @@
                 android:layout_marginLeft="40dp"
                 />
             <ImageView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
@@ -117,35 +104,14 @@
                 android:src="@drawable/baseline_arrow_forward_ios_24"
                 />
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_centerHorizontal="true"
-            android:layout_width="380dp"
-            android:layout_height="80dp"
-            android:background="@drawable/round"
-            android:layout_marginTop="370dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="연동된 소셜 계정"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="40dp" />
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="#123"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp" />
-        </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/logout_button"
             android:layout_centerHorizontal="true"
             android:layout_width="380dp"
             android:layout_height="80dp"
             android:background="@drawable/round"
-            android:layout_marginTop="460dp"
+            android:layout_marginTop="370dp"
             >
             <TextView
                 android:layout_width="wrap_content"

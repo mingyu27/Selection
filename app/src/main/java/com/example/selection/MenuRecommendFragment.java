@@ -165,8 +165,8 @@ public class MenuRecommendFragment extends Fragment {
                         double tempRate = max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getCashbackRate(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getDiscountRate() );
 //                        Log.d("RECOMMENDLOG", "검사중 카드: " + savedKookmin.get(i).getCardName() + " " + category + "모두 할인가능, " + savedKookmin.get(i).getCafeDiscount());
 //                        Log.d("RECOMMENDLOG", "초기화된 값: " + savedKookminBenfitAmount.get(i) + ", " + savedKookminBenfitRate.get(i));
-                        if(tempAmount >= bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedShinhan.get(i); bestBenefitAmountFunctionCardCompany = "Shinhan";}
-                        if(tempRate >= bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedShinhan.get(i); bestBenefitRateFunctionCardCompany = "Shinhan";}
+                        if(tempAmount > bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedShinhan.get(i); bestBenefitAmountFunctionCardCompany = "Shinhan";}
+                        if(tempRate > bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedShinhan.get(i); bestBenefitRateFunctionCardCompany = "Shinhan";}
                     }
 
 
@@ -179,8 +179,8 @@ public class MenuRecommendFragment extends Fragment {
 //                            Log.d("RECOMMENDLOG", "검사중 카드: " + savedKookmin.get(i).getCardName() + " " + category + "일부할인가능이며 해당매장 할인가능, " + savedKookmin.get(i).getCafeDiscount().get(2).getCashbackAmount());
 //                            Log.d("RECOMMENDLOG", "초기화된 값: " + savedKookminBenfitAmount.get(i) + ", " + savedKookminBenfitRate.get(i));
 
-                            if(tempAmount >= bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedShinhan.get(i); bestBenefitAmountFunctionCardCompany = "Shinhan";}
-                            if(tempRate >= bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedShinhan.get(i); bestBenefitRateFunctionCardCompany = "Shinhan";}
+                            if(tempAmount > bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedShinhan.get(i); bestBenefitAmountFunctionCardCompany = "Shinhan";}
+                            if(tempRate > bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedShinhan.get(i); bestBenefitRateFunctionCardCompany = "Shinhan";}
                         }
                         //방문한 매장이 에버랜드, 롯데월드, 서울랜드, 캐리, 서울랜드 중에 없으면,,,,혜택적용불가지만,,나중에 비교를 위해 0, 0.0넣음
                         else{
@@ -292,8 +292,16 @@ public class MenuRecommendFragment extends Fragment {
 //            Log.d(TAG, "" + savedShinhanBenfitRate.get(0));
         }
 
-        binding.pay1Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("bestAmount", bestBenefitAmountFunctionCard));});
-        binding.pay2Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("bestRate", bestBenefitRateFunctionCard));});
+
+        binding.pay2Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class)
+                .putExtra("cardImageResourceID", typedArray.getResourceId(bestBenefitRateFunctionCard.getCardIndex(),-1))
+                .putExtra("cardName", bestBenefitRateFunctionCard.getCardName())
+                .putExtra("bestRate", bestBenefitRateFunctionCard));});
+        binding.pay1Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class)
+                .putExtra("cardImageResourchID", typedArray.getResourceId(bestBenefitAmountFunctionCard.getCardIndex(),-1))
+                .putExtra("cardName", bestBenefitAmountFunctionCard.getCardName())
+                .putExtra("bestAmount", bestBenefitAmountFunctionCard));});
+
         binding.recommendNewCardView.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendNewCard.class).putExtra("payPriority", 2));});
         binding.selectedLocation.setOnClickListener(v -> {mainActivity.startDialog();});
 

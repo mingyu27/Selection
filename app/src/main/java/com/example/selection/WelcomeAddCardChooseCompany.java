@@ -27,10 +27,8 @@ public class WelcomeAddCardChooseCompany extends AppCompatActivity implements Vi
         binding = ActivityAddCardChooseCompanyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
-
         binding.shinhanButton.setOnClickListener(this);
         binding.kookminButton.setOnClickListener(this);
-
         binding.goNextButton.setOnClickListener(this);
         binding.hyundaiButton.setOnClickListener(this);
         binding.nonghyupButton.setOnClickListener(this);
@@ -39,15 +37,16 @@ public class WelcomeAddCardChooseCompany extends AppCompatActivity implements Vi
         binding.wooriButton.setOnClickListener(this);
         binding.bcButton.setOnClickListener(this);
         binding.samsungButton.setOnClickListener(this);
-
-
     }
-
     @Override
     public void onClick(View v) {
         if(v == binding.goNextButton){
-            startActivity(new Intent(WelcomeAddCardChooseCompany.this, WelcomeAddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
-             }
+            if(companyToEnrollList.isEmpty()) {
+                startActivity(new Intent(WelcomeAddCardChooseCompany.this, MainActivity.class).putExtra("functionUser", functionUser).putExtra("isJustStarted", true));
+            } else {
+                startActivity(new Intent(WelcomeAddCardChooseCompany.this, WelcomeAddCardChooseCard.class).putExtra("CompanyToEnrollList", companyToEnrollList).putExtra("functionUser", functionUser));
+            }
+        }
         else if(v == binding.shinhanButton){
             if(isSelectedShinhan == false){companyToEnrollList.add("신한");binding.shinhanButton.setBackgroundResource(R.drawable.round_bold); isSelectedShinhan = true;}
             else{companyToEnrollList.remove("신한"); binding.shinhanButton.setBackgroundResource(R.drawable.round); isSelectedShinhan = false;}
@@ -60,6 +59,4 @@ public class WelcomeAddCardChooseCompany extends AppCompatActivity implements Vi
             Toast.makeText(this, "추후 지원될 예정입니다.", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 }

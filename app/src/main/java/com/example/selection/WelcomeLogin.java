@@ -1,5 +1,9 @@
 package com.example.selection;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.selection.databinding.ActivityWelcomeLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WelcomeLogin extends AppCompatActivity {
     private ActivityWelcomeLoginBinding binding;
@@ -86,7 +89,7 @@ public class WelcomeLogin extends AppCompatActivity {
                                         if (task1.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task1.getResult()) {
                                                 functionUser = document.toObject(FunctionUser.class);
-                                                startActivity(new Intent(WelcomeLogin.this, WelcomeAddCardChooseCompany.class).putExtra("functionUser", functionUser));
+                                                startActivity(new Intent(WelcomeLogin.this,MainActivity.class).putExtra("functionUser", functionUser));
                                             }
                                         } else {
                                             Log.d(TAG, "Error getting documents: ", task1.getException());
@@ -105,41 +108,15 @@ public class WelcomeLogin extends AppCompatActivity {
     }
     private void showLoginFailureDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        // 긍정적인(확인) 버튼 설정
-        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // 사용자가 확인을 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
-                dialog.dismiss();
-            }
-        });
-
-        // 부정적인(취소) 버튼 설정
-        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // 사용자가 취소를 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
-                dialog.dismiss();
-            }
-        });
-
-        // 다이얼로그 제목 및 메시지 설정
         builder.setTitle("로그인 실패")
-                .setMessage("아이디 또는 비밀번호가 올바르지 않습니다.");
-
-        // 긍정적인(확인) 버튼의 글자색 설정
-        AlertDialog alertDialog = builder.create();
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                // 버튼의 글자색을 변경합니다.
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.black));
-            }
-        });
-
-        // 다이얼로그 표시
-        alertDialog.show();
+                .setMessage("아이디 또는 비밀번호가 올바르지 않습니다.")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 확인을 누르면 아무 작업도 하지 않고 다이얼로그를 닫습니다.
+                        dialog.dismiss();
+                    }
+                })
+                .show().getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.black));// 예 버튼 글자색 변경
     }
-
 }

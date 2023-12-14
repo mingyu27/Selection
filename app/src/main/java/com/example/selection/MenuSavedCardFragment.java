@@ -2,10 +2,12 @@
 package com.example.selection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,14 +32,7 @@ public class MenuSavedCardFragment extends Fragment {
     private List<Integer> savedKookminCardIndexArrayList = new ArrayList<>();
     private String TAG = "SMG";
     private FunctionUser functionUser;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Button button;
 
     public static MenuSavedCardFragment newInstance(FunctionUser functionUser) {
         MenuSavedCardFragment fragment = new MenuSavedCardFragment();
@@ -58,26 +54,22 @@ public class MenuSavedCardFragment extends Fragment {
     private class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Context context;
         ArrayList<Item> items;
-
         public MyAdapter(Context context, ArrayList<Item> items) {
             this.context = context;
             this.items = items;
         }
-
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(context).inflate(R.layout.itemview, parent, false);
             return new MyViewHolder(itemView);
         }
-
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             Item item = items.get(position);
             holder.textView.setText(item.getText());
             holder.imageView.setImageResource(item.getImg());
         }
-
         @Override
         public int getItemCount() {
             return items.size();
@@ -103,7 +95,6 @@ public class MenuSavedCardFragment extends Fragment {
         }
         public int getCardIndex() { return index; }
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,7 +126,7 @@ public class MenuSavedCardFragment extends Fragment {
 
                     // Item 객체 생성 및 리스트에 추가
                     items.add(new Item(cardName, cardImageResourceId, index));
-                    // Log.d("YJH", String.valueOf(index));
+                   // Log.d("YJH", String.valueOf(index));
                 }
                 Log.d("YJH", "Saved Kookmin Card Index List:");
                 for (Integer index : savedKookminCardIndexArrayList) {
@@ -153,13 +144,11 @@ public class MenuSavedCardFragment extends Fragment {
 
                     // Item 객체 생성 및 리스트에 추가
                     items.add(new Item(cardName, cardImageResourceId, index));
-                    //  Log.d("YJH", String.valueOf(index));
+                  //  Log.d("YJH", String.valueOf(index));
                 }
             }catch (NullPointerException e){}
-
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -169,14 +158,17 @@ public class MenuSavedCardFragment extends Fragment {
         adapter = new MyAdapter(requireContext(), items);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
         return view;
     }
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-//        super.onViewCreated(view, savedInstanceState);
-//        Intent intent = new Intent(getActivity(),MenuPossessCard.class);
-//        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//        startActivity(intent);
-//    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        button = view.findViewById(R.id.edit_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireContext(), WelcomeAddCardChooseCompany.class).putExtra("functionUser", functionUser));
+            }
+        });
+    }
 }

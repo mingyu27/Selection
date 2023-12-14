@@ -34,34 +34,34 @@ public class Welcome extends AppCompatActivity {
     private ActivityWelcomeBinding binding;
     private View loginWithKakaoButton, loginButton, joinButton;
     private FirebaseAuth mAuth;
-    FirebaseUser currentUser;
+    private FirebaseUser currentUser;
     private FirebaseFirestore db;
     private static final String TAG = "SMG";
     private String userName;
     private FunctionUser functionUser;
 
-    public void onStart() {
-        super.onStart();
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-        if(currentUser != null) {
-            db.collection("User")
-                    .whereEqualTo("uid", currentUser.getUid())
-                    .get()
-                    .addOnCompleteListener(task1 -> {
-                        if (task1.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task1.getResult()) {
-                                functionUser = document.toObject(FunctionUser.class);
-                                startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
-                                Log.d(TAG, "저장된 신한카드: " + functionUser.getSavedKookminIndexList().size() + "개, 국민카드: " + functionUser.getSavedKookminIndexList().size() + "개");
-                                finish();
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task1.getException());
-                        }
-                    });
-        }
-    }
+//    public void onStart() {
+//        super.onStart();
+//        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        db = FirebaseFirestore.getInstance();
+//        if(currentUser != null) {
+//            db.collection("User")
+//                    .whereEqualTo("uid", currentUser.getUid())
+//                    .get()
+//                    .addOnCompleteListener(task1 -> {
+//                        if (task1.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task1.getResult()) {
+//                                functionUser = document.toObject(FunctionUser.class);
+//                                startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
+//                                Log.d(TAG, "저장된 신한카드: " + functionUser.getSavedKookminIndexList().size() + "개, 국민카드: " + functionUser.getSavedKookminIndexList().size() + "개");
+//                                finish();
+//                            }
+//                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task1.getException());
+//                        }
+//                    });
+//        }
+//    }
 
 //    getCustomToken() 실행
     Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
@@ -83,7 +83,7 @@ public class Welcome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
-        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+//        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         setContentView(binding.getRoot());
 
         mAuth = FirebaseAuth.getInstance();
