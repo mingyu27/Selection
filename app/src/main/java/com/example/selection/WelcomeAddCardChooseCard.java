@@ -76,8 +76,8 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
         }
 
         //현재 등록예정인 리스트에..functionUser의 기존 리스트를 불러오기..카드사별로
-        if(companyNameToEnroll.equals("신한")){savedCardIndexArrayList = (ArrayList<Integer>) functionUser.getSavedShinhanIndexList(); savedCardIndexArrayList = new ArrayList<>(new HashSet<>(savedCardIndexArrayList));}
-        else if(companyNameToEnroll.equals("KB국민")){savedCardIndexArrayList = (ArrayList<Integer>) functionUser.getSavedKookminIndexList(); savedCardIndexArrayList = new ArrayList<>(new HashSet<>(savedCardIndexArrayList));}
+        if(companyNameToEnroll.equals("신한")){savedCardIndexArrayList = (ArrayList<Integer>) functionUser.getSavedShinhanIndexList();}
+        else if(companyNameToEnroll.equals("KB국민")){savedCardIndexArrayList = (ArrayList<Integer>) functionUser.getSavedKookminIndexList();}
 
 
         NumberPicker pickCard = binding.cardSelectList;
@@ -224,7 +224,7 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            // 백그라운드에서 실행할 작업을 수행합니다.
+            // 카드사,인덱스로 원하는 카드정보를 fs에서 받아온다
             db.collection(companyNameToEnroll.equals("신한") ? "Shinhan" : "Kookmin")
                     .whereEqualTo("cardIndex", selectedCardIndex)
                     .get()
@@ -289,11 +289,14 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
         ArrayList<FunctionLocationSpecificDiscount> functionLocationSpecificDiscountArrayList = new ArrayList<>();
         switch (specificDiscount){
             case "amusementDiscount":
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "레고랜드"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "롯데월드"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "서울랜드"));
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "에버랜드"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "캐리비안베이"));
                 break;
             case "bakeryDiscount":
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "던킨"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "뚜레쥬르"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "파리바게뜨"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "파리크라상"));
@@ -303,9 +306,12 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "교보문고"));
                 break;
             case "cafeDiscount":
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "배스킨라빈스"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "빽다방"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "스타벅스"));
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "엔제리너스"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "이디야"));
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "카페베네"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "커피빈"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "투썸플레이스"));
                 break;
@@ -317,6 +323,8 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                 break;
             case "fastFoodDiscount":
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "KFC"));
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "롯데리아"));
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "버거킹"));
                 break;
             case "restaurantDiscount":
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "계절밥상"));
@@ -325,6 +333,7 @@ public class WelcomeAddCardChooseCard extends AppCompatActivity {
                 break;
             case "theaterDiscount":
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "CGV"));
+                functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "롯데시네마"));
                 functionLocationSpecificDiscountArrayList.add(getFunctionSpecificDiscount(document, specificDiscount, "메가박스"));
                 break;
 

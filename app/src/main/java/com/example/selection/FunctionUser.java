@@ -25,6 +25,8 @@ public class FunctionUser implements Serializable {
 
     private List<FunctionCard> savedKookminFunctionCardList = new ArrayList<>();
     private List<FunctionCard> savedShinhanFunctionCardList = new ArrayList<>();
+    private List<FunctionCard> likedKookminFunctionCardList = new ArrayList<>();
+    private List<FunctionCard> likedShinhanFunctionCardList = new ArrayList<>();
     public FunctionUser(){}
 
 
@@ -177,5 +179,21 @@ public class FunctionUser implements Serializable {
 
     public void setSavedShinhanFunctionCardList(List<FunctionCard> savedShinhanFunctionCardList) {
         this.savedShinhanFunctionCardList = savedShinhanFunctionCardList;
+    }
+
+    public List<FunctionCard> getLikedKookminFunctionCardList() {
+        return likedKookminFunctionCardList;
+    }
+
+    public void setLikedKookminFunctionCardList(List<FunctionCard> likedKookminFunctionCardList) {
+        this.likedKookminFunctionCardList = likedKookminFunctionCardList;
+    }
+
+    public List<FunctionCard> getLikedShinhanFunctionCardList() {
+        return likedShinhanFunctionCardList;
+    }
+
+    public void setLikedShinhanFunctionCardList(List<FunctionCard> likedShinhanFunctionCardList) {
+        this.likedShinhanFunctionCardList = likedShinhanFunctionCardList;
     }
 }

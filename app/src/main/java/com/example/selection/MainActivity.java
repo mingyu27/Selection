@@ -32,14 +32,9 @@ public class MainActivity extends AppCompatActivity {
                 storeName = o.getData().getStringExtra("storeName");
                 category = o.getData().getStringExtra("category");
             }
-            Bundle bundle = new Bundle();
-            bundle.putString("storeName", storeName);
-            bundle.putString("category", category);
-            bundle.putSerializable("functionUser", functionUser);
-            MenuRecommendFragment menuRecommendFragment = new MenuRecommendFragment();
-            menuRecommendFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), menuRecommendFragment).commit();
-            Log.d(TAG, "bundle("+storeName +", "  + category + ") sent to MenuRecommendFragment1");
+
+            getSupportFragmentManager().beginTransaction().replace(binding.fragmentContainer.getId(), MenuRecommendFragment.newInstance(functionUser, storeName, category)).commit();
+//            Log.d(TAG, "bundle("+storeName +", "  + category + ") sent to MenuRecommendFragment1");
         }
     });
     @Override
@@ -51,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         functionUser = (FunctionUser) getIntent().getSerializableExtra("functionUser");
-        Log.d(TAG, "functionuser에  있는카드 = " + functionUser.getSavedKookminFunctionCardList().get(0).getCardName());
+//        Log.d(TAG, "functionuser에  있는카드 = " + functionUser.getSavedKookminFunctionCardList().get(0).getCardName());
         Log.d(TAG, functionUser.getName() + "at MainActivity");
         bottomNavigationView = binding.bottomNavigation;
-        transferTo(MenuRecommendFragment.newInstance(functionUser));
+        transferTo(MenuRecommendFragment.newInstance(functionUser, "매장을 선택하세요", ""));
 
 
 
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 int itemID = item.getItemId();
 
                 if(itemID == R.id.home){
-                    transferTo(MenuRecommendFragment.newInstance(functionUser));
+                    transferTo(MenuRecommendFragment.newInstance(functionUser, "매장을 선택하세요", ""));
                     return true;
                 }
                 if(itemID == R.id.my_card){

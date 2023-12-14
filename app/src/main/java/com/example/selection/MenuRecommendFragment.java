@@ -5,6 +5,7 @@ import static android.content.Intent.getIntent;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -45,17 +46,22 @@ public class MenuRecommendFragment extends Fragment {
     private MainActivity mainActivity;
     private FunctionUser functionUser;
     private FirebaseFirestore db;
+    private TypedArray typedArray;
     private boolean isLocationSet = false;
 
 
     List<FunctionCard> savedKookmin;
     List<FunctionCard> savedShinhan;
 
-    List<Integer> savedShinhanBenfitAmount = new ArrayList<>();
-    List<Double> savedShinhanBenfitRate = new ArrayList<>();
 
-    List<Integer> savedKookminBenfitAmount = new ArrayList<>();
-    List<Double> savedKookminBenfitRate = new ArrayList<>();
+
+    private int bestBenefitAmount = 0;
+    private double bestBenefitRate = 0.0;
+
+    private FunctionCard bestBenefitAmountFunctionCard;
+    private FunctionCard bestBenefitRateFunctionCard;
+    private String bestBenefitAmountFunctionCardCompany = "";
+    private String bestBenefitRateFunctionCardCompany = "";
 
 
 
@@ -66,10 +72,12 @@ public class MenuRecommendFragment extends Fragment {
 
 
     //MenuRecommendFragment생성할때,, functionUser매겨변수로 받아와서,, 유저포함한 fragment생성해서 return
-    public static MenuRecommendFragment newInstance(FunctionUser functionUser) {
+    public static MenuRecommendFragment newInstance(FunctionUser functionUser, String storeName, String category) {
         MenuRecommendFragment fragment = new MenuRecommendFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("functionUser",functionUser);
+        bundle.putString("storeName", storeName);
+        bundle.putString("category", category);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -85,7 +93,7 @@ public class MenuRecommendFragment extends Fragment {
     //fragemnt 보여지기전에,,안에 들어있는것들 꺼내보기
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "MenuRecommendFragment onCreate Started");
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             //매장이름 넣기
@@ -99,7 +107,7 @@ public class MenuRecommendFragment extends Fragment {
             try{
                 FunctionUser tempUser;
                 tempUser = (FunctionUser) getArguments().getSerializable("functionUser");
-                if(tempUser != null){functionUser = tempUser; Log.d(TAG, functionUser.getName() + "at MenuRecommendFragment"); savedShinhan = functionUser.getSavedShinhanFunctionCardList(); savedKookmin = functionUser.getSavedKookminFunctionCardList();}
+                if(tempUser != null){functionUser = tempUser; savedShinhan = functionUser.getSavedShinhanFunctionCardList(); savedKookmin = functionUser.getSavedKookminFunctionCardList();}
 
 
             }catch (NullPointerException e){}
@@ -110,7 +118,7 @@ public class MenuRecommendFragment extends Fragment {
                 if(str != null){category = str; isLocationSet = true; }
             }catch (NullPointerException e){}
         }
-        Log.d(TAG, "MenuRecommendFragment onCreate ended with " + functionUser.getName() + ", " + storeName + ", " + category );
+        Log.d(TAG, functionUser.getName() + "at MenuRecommendFragment");
 
 
     }
@@ -120,9 +128,12 @@ public class MenuRecommendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(TAG, "MenuRecommendFragment onCreateView");
+//        Log.d(TAG, "MenuRecommendFragment onCreateView");
 
         binding = FragmentMenuRecommendBinding.inflate(inflater, container, false);
+
+
+
 
         binding.selectedLocation.setText(storeName);
 
@@ -134,6 +145,9 @@ public class MenuRecommendFragment extends Fragment {
 
 
             int categoryNum = categoryToNum(category);
+            Log.d("RECOMMENDLOG", "categoryNum: " + categoryNum);
+
+
             //0번째는 amusement
             //1번째 bakery
             //2번째 bookstore
@@ -143,62 +157,99 @@ public class MenuRecommendFragment extends Fragment {
 
             //저장된 각 신한카드가 amusement true인지
             for(int i = 0; i < savedShinhan.size(); i++){
-                 //검사중인카드가 amusement할인 가능이면
+                //검사중인카드가 amusement할인 가능이면(0)
                 if(isIfDiscountCategory(savedShinhan.get(i), categoryNum)){
-
                     //검사중인 카드가 discountAll true이면
                     if(isIfDiscountCategoryAll(savedShinhan.get(i), categoryNum) == true){
-                        savedShinhanBenfitAmount.add((int) max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getCashbackAmount(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getDiscountAmount() ));
-                        savedShinhanBenfitRate.add( max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getCashbackRate(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getDiscountRate() ));
-                        Log.d(TAG, "검사중 카드: " + savedShinhan.get(i).getCardName() + " discountAll  = true");
+                        int tempAmount =(int) max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getCashbackAmount(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getDiscountAmount() );
+                        double tempRate = max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getCashbackRate(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(0).getDiscountRate() );
+//                        Log.d("RECOMMENDLOG", "검사중 카드: " + savedKookmin.get(i).getCardName() + " " + category + "모두 할인가능, " + savedKookmin.get(i).getCafeDiscount());
+//                        Log.d("RECOMMENDLOG", "초기화된 값: " + savedKookminBenfitAmount.get(i) + ", " + savedKookminBenfitRate.get(i));
+                        if(tempAmount >= bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedShinhan.get(i); bestBenefitAmountFunctionCardCompany = "Shinhan";}
+                        if(tempRate >= bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedShinhan.get(i); bestBenefitRateFunctionCardCompany = "Shinhan";}
                     }
+
+
                     //검사중인 카드가 discountAll false이면
                     if(isIfDiscountCategoryAll(savedShinhan.get(i), categoryNum) == false){
                         //방문한 매장이 에버랜드, 롯데월드, 서울랜드, 캐리, 서울랜드 중에 하나이면
                         if( isStoreSpecial(storeName) ){
-                            savedShinhanBenfitAmount.add((int) max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackAmount(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountAmount() ));
-                            savedShinhanBenfitRate.add( max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackRate(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountRate() ));
-                            Log.d(TAG, "검사중 카드: " + savedShinhan.get(i).getCardName() + " discountAll  = false, special");
+                            int tempAmount = (int) max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackAmount(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountAmount() );
+                            double tempRate =  max(getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackRate(), getCategoryDiscount(savedShinhan.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountRate() );
+//                            Log.d("RECOMMENDLOG", "검사중 카드: " + savedKookmin.get(i).getCardName() + " " + category + "일부할인가능이며 해당매장 할인가능, " + savedKookmin.get(i).getCafeDiscount().get(2).getCashbackAmount());
+//                            Log.d("RECOMMENDLOG", "초기화된 값: " + savedKookminBenfitAmount.get(i) + ", " + savedKookminBenfitRate.get(i));
+
+                            if(tempAmount >= bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedShinhan.get(i); bestBenefitAmountFunctionCardCompany = "Shinhan";}
+                            if(tempRate >= bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedShinhan.get(i); bestBenefitRateFunctionCardCompany = "Shinhan";}
                         }
                         //방문한 매장이 에버랜드, 롯데월드, 서울랜드, 캐리, 서울랜드 중에 없으면,,,,혜택적용불가지만,,나중에 비교를 위해 0, 0.0넣음
                         else{
-                            savedShinhanBenfitAmount.add(0); savedShinhanBenfitRate.add(0.0);
-                            Log.d(TAG, "검사중 카드: " + savedShinhan.get(i).getCardName() + " discountAll  = false, not special");
+//                            Log.d("RECOMMENDLOG", "검사중 카드: " + savedKookmin.get(i).getCardName() + " " + category + "일부할인가능이며 해당매장 할인.가능, " + savedKookmin.get(i).getCafeDiscount());
+//                            Log.d("RECOMMENDLOG", "초기화된 값: " + savedKookminBenfitAmount.get(i) + ", " + savedKookminBenfitRate.get(i));
                         }
                     }
                 }
+
+
             }
+
+
 
             //저장된 각 국민카드가 amusement true인지
             for(int i = 0; i < savedKookmin.size(); i++){
-                 //검사중인카드가 amusement할인 가능이면
+                 //검사중인카드가 amusement할인 가능이면(0)
                 if(isIfDiscountCategory(savedKookmin.get(i), categoryNum)){
                     //검사중인 카드가 discountAll true이면
                     if(isIfDiscountCategoryAll(savedKookmin.get(i), categoryNum) == true){
-                        savedKookminBenfitAmount.add((int) max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getCashbackAmount(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getDiscountAmount() ));
-                        savedKookminBenfitRate.add( max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getCashbackRate(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getDiscountRate() ));
-                        Log.d(TAG, "검사중 카드: " + savedKookmin.get(i).getCardName() + " discountAll  = true");
+                        int tempAmount =(int) max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getCashbackAmount(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getDiscountAmount() );
+                        double tempRate = max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getCashbackRate(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(0).getDiscountRate() );
+
+                        //값 update할만하면,,update해주기
+                        if(tempAmount > bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedKookmin.get(i); bestBenefitAmountFunctionCardCompany = "Kookmin";}
+                        if(tempRate > bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedKookmin.get(i); bestBenefitRateFunctionCardCompany = "Kookmin";}
                     }
+
+
                     //검사중인 카드가 discountAll false이면
                     if(isIfDiscountCategoryAll(savedKookmin.get(i), categoryNum) == false){
                         //방문한 매장이 에버랜드, 롯데월드, 서울랜드, 캐리, 서울랜드 중에 하나이면
                         if( isStoreSpecial(storeName) ){
-                            savedKookminBenfitAmount.add((int) max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackAmount(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountAmount() ));
-                            savedKookminBenfitRate.add( max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackRate(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountRate() ));
-                            Log.d(TAG, "검사중 카드: " + savedKookmin.get(i).getCardName() + " discountAll  = false, special");
+                            int tempAmount = (int) max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackAmount(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountAmount() );
+                            double tempRate =  max(getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getCashbackRate(), getCategoryDiscount(savedKookmin.get(i), categoryNum).get(getStoreNameIndex(storeName)).getDiscountRate() );
+
+
+                            if(tempAmount > bestBenefitAmount) {bestBenefitAmount = tempAmount; bestBenefitAmountFunctionCard = savedKookmin.get(i); bestBenefitAmountFunctionCardCompany = "Kookmin";}
+                            if(tempRate > bestBenefitRate) {bestBenefitRate = tempRate; bestBenefitRateFunctionCard = savedKookmin.get(i); bestBenefitRateFunctionCardCompany = "Kookmin";}
                         }
                         //방문한 매장이 에버랜드, 롯데월드, 서울랜드, 캐리, 서울랜드 중에 없으면,,,,혜택적용불가지만,,나중에 비교를 위해 0, 0.0넣음
                         else{
-                            savedKookminBenfitAmount.add(0); savedKookminBenfitRate.add(0.0);
-                            Log.d(TAG, "검사중 카드: " + savedKookmin.get(i).getCardName() + " discountAll  = false, not special");
+
                         }
                     }
                 }
+
+
             }
 
 
-//            Log.d(TAG, "검사완료된 신한카드: " + savedKookminBenfitAmount);
-            Log.d(TAG, "검사완료된 국민카드: " + "(최고할인율 : " + savedKookminBenfitRate.get(0).toString() + ")" + "(최고할인액 : " + savedKookminBenfitAmount.get(0).toString() + ")");
+
+//            Log.d("RECOMMENDLOG", "최고할인액: " + bestBenefitAmountFunctionCard.getCardName() + ", " + bestBenefitAmount + "원");
+//            Log.d("RECOMMENDLOG", "최고할인비율: " + bestBenefitRateFunctionCard.getCardName() + ", " + bestBenefitRate*100 + "%");
+
+            switch (bestBenefitAmountFunctionCardCompany){
+                case "Shinhan": typedArray = getResources().obtainTypedArray(R.array.shinHanCardImageList); showBestBenefitAmount(); break;
+                case "Kookmin": typedArray = getResources().obtainTypedArray(R.array.kookMinCardImageList); showBestBenefitAmount(); break;
+                default: break;
+            }
+
+
+            switch (bestBenefitRateFunctionCardCompany){
+                case "Shinhan": typedArray = getResources().obtainTypedArray(R.array.shinHanCardImageList); showBestBenefitRate(); break;
+                case "Kookmin": typedArray = getResources().obtainTypedArray(R.array.kookMinCardImageList); showBestBenefitRate(); break;
+                default: break;
+            }
+
+
 
 
         }
@@ -210,9 +261,23 @@ public class MenuRecommendFragment extends Fragment {
 
 
 
+
         return binding.getRoot();
     }
 
+    private void showBestBenefitAmount(){
+        binding.amountDiscountCardName.setText(bestBenefitAmountFunctionCard.getCardName());
+        binding.amountDiscountCardBenefit.setText(bestBenefitAmount + "원");
+        binding.amountDiscountCardImage.setImageResource(typedArray.getResourceId(bestBenefitAmountFunctionCard.getCardIndex(), -1));
+
+    }
+
+    private void showBestBenefitRate(){
+        binding.rateDiscountCardName.setText(bestBenefitRateFunctionCard.getCardName());
+        binding.rateDiscountCardBenefit.setText(bestBenefitRate*100 + "%");
+        binding.rateDiscountCardImage.setImageResource(typedArray.getResourceId(bestBenefitRateFunctionCard.getCardIndex(), -1));
+
+    }
 
 
 
@@ -227,20 +292,14 @@ public class MenuRecommendFragment extends Fragment {
 //            Log.d(TAG, "" + savedShinhanBenfitRate.get(0));
         }
 
-        binding.pay1Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("payPriority", 1));});
-        binding.pay2Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("payPriority", 2));});
+        binding.pay1Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("bestAmount", bestBenefitAmountFunctionCard));});
+        binding.pay2Card.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendSavedCard.class).putExtra("bestRate", bestBenefitRateFunctionCard));});
         binding.recommendNewCardView.setOnClickListener(v-> {startActivity(new Intent(getActivity(), MenuRecommendNewCard.class).putExtra("payPriority", 2));});
         binding.selectedLocation.setOnClickListener(v -> {mainActivity.startDialog();});
 
 
     }
 
-
-    @Override
-    public void onPause() {
-        Log.d(TAG, "MenuRecommendFragment onPause");
-        super.onPause();
-    }
 
 
 

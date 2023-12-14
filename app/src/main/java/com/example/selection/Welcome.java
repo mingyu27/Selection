@@ -42,8 +42,7 @@ public class Welcome extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
-        mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         if(currentUser != null) {
             db.collection("User")
@@ -54,6 +53,7 @@ public class Welcome extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task1.getResult()) {
                                 functionUser = document.toObject(FunctionUser.class);
                                 startActivity(new Intent(Welcome.this, MainActivity.class).putExtra("functionUser", functionUser));
+                                Log.d(TAG, "저장된 신한카드: " + functionUser.getSavedKookminIndexList().size() + "개, 국민카드: " + functionUser.getSavedKookminIndexList().size() + "개");
                                 finish();
                             }
                         } else {
